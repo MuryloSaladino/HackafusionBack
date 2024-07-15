@@ -1,0 +1,16 @@
+spring.application.name=realstatemanager
+
+# Database config access
+spring.datasource.url=<DATASOURCE_URL>
+spring.datasource.username=<YOUR_USERNAME>
+spring.datasource.password=<YOUR_PASSWORD>
+
+# Jpa config to modify the database properly
+spring.jpa.properties.hibernate.jdbc.lob.non_contextual_creation=true
+spring.jpa.properties.hibernate.dialect=org.hibernate.dialect.PostgreSQLDialect
+spring.jpa.hibernate.ddl-auto=update
+
+# Needs to be strong (check io.jsonwebtoken for details or simply type a lot of numbers)
+security.jwt.secret-key=<SECRET_KEY>
+# 3h in milliseconds
+security.jwt.expiration-time=10800000
