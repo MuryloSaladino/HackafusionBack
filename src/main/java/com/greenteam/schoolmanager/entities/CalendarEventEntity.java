@@ -6,7 +6,7 @@ import lombok.Getter;
 import java.util.Date;
 
 @Table @Entity @Getter
-public class CalendarEvent extends BaseEntity {
+public class CalendarEventEntity extends BaseEntity {
 
     @Column
     private String title;
@@ -23,6 +23,14 @@ public class CalendarEvent extends BaseEntity {
     @ManyToOne @JoinColumn()
     private UserEntity userEntity;
 
+
+    public CalendarEventEntity(){ };
+
+    public CalendarEventEntity(String title, String description, Date date) {
+        this.title= title;
+        this.description = description;
+        this.date = date;
+    }
 
     public void setTitle(String title) {
         this.update();

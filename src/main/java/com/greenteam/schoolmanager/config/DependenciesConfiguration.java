@@ -32,6 +32,11 @@ public class DependenciesConfiguration {
     }
 
     @Bean @Scope() @Primary
+    public CalendarEntityService calendarEntityService() {
+        return new CalendarEntityServiceDefault();
+    }
+
+    @Bean @Scope() @Primary
     public DisciplineEntityService disciplineEntityService() { return new DisciplineEntityServiceDefault(); }
 
     @Bean @Scope() @Primary
