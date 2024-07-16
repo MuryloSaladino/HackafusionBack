@@ -11,4 +11,13 @@ public class StudentGangDisciplineEntity extends BaseEntity {
 
     @ManyToOne() @JoinColumn(nullable = false)
     private DisciplineEntity discipline;
+
+
+    public StudentGangDisciplineEntity() {}
+
+    public StudentGangDisciplineEntity(StudentGangEntity gang, DisciplineEntity discipline) {
+        super();
+        this.gang = gang;
+        this.discipline = discipline;
+    }
 }
