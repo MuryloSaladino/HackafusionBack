@@ -2,9 +2,11 @@ package com.greenteam.schoolmanager.config;
 
 import com.greenteam.schoolmanager.interfaces.DisciplineEntityService;
 import com.greenteam.schoolmanager.interfaces.JwtTokenManager;
+import com.greenteam.schoolmanager.interfaces.StudentGangService;
 import com.greenteam.schoolmanager.interfaces.UserEntityService;
 import com.greenteam.schoolmanager.services.DisciplineEntityServiceDefault;
 import com.greenteam.schoolmanager.services.JwtTokenManagerDefault;
+import com.greenteam.schoolmanager.services.StudentGangServiceDefault;
 import com.greenteam.schoolmanager.services.UserEntityServiceDefault;
 import com.greenteam.schoolmanager.sessions.UserSession;
 import org.springframework.context.annotation.*;
@@ -18,6 +20,9 @@ public class DependenciesConfiguration {
     public JwtTokenManager jwtTokenManager() {
         return new JwtTokenManagerDefault();
     }
+
+    @Bean @Scope() @Primary
+    public StudentGangService studentGangService() { return new StudentGangServiceDefault(); }
 
     @Bean @Scope() @Primary
     public UserEntityService userEntityService() {
