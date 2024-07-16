@@ -26,6 +26,18 @@ public class UserEntity extends BaseEntity {
     private StudentGangEntity studentGang;
 
 
+    public UserEntity() {}
+
+    public UserEntity(String username, String password, String fullname, String email, UserRole role) {
+        super();
+        this.username = username;
+        this.password = password;
+        this.fullname = fullname;
+        this.email = email;
+        this.role = role;
+    }
+
+
     public void setUsername(String username) {
         this.update();
         this.username = username;
@@ -49,5 +61,10 @@ public class UserEntity extends BaseEntity {
     public void setRole(UserRole role) {
         this.update();
         this.role = role;
+    }
+
+    public void setStudentGang(StudentGangEntity studentGang) {
+        this.update();
+        this.studentGang = studentGang;
     }
 }
