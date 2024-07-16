@@ -53,6 +53,22 @@ public class UserEntityServiceDefault implements UserEntityService {
     }
 
     @Override
+    public UserEntity getByUsernameOrEmail(String usernameOrEmail) {
+
+        UserEntity user = null;
+
+        var emailQuery = userRepository.findByEmail(usernameOrEmail);
+        var usernameQuery = userRepository.findByUsername(usernameOrEmail);
+
+        if(emailQuery.isPresent()) user = emailQuery.get();
+        if(usernameQuery.isPresent()) user = usernameQuery.get();
+
+        if(user == null) throw new NotFoundException("User not found");
+
+        return user;
+    }
+
+    @Override
     public List<UserEntity> getAll() {
         return (List<UserEntity>) userRepository.findAll();
     }

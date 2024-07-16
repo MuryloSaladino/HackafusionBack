@@ -9,6 +9,7 @@ import java.util.List;
 public interface UserEntityService {
     UserEntity create(UserEntityCreationPayload payload);
     UserEntity getById(Long id);
+    UserEntity getByUsernameOrEmail(String usernameOrEmail);
     List<UserEntity> getAll();
     UserEntity update(Long id, UserEntityUpdatePayload payload);
     void delete(Long id);
