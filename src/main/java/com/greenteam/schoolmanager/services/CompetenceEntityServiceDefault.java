@@ -33,7 +33,7 @@ public class CompetenceEntityServiceDefault implements CompetenceEntityService {
 
         competenceEntity.setDisciplineEntity(query.get());
 
-        return competenceEntity;
+        return competenceRepository.save(competenceEntity);
     }
 
     @Override

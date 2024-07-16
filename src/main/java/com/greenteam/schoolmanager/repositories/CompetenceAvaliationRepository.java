@@ -1,9 +1,9 @@
 package com.greenteam.schoolmanager.repositories;
 
-import com.greenteam.schoolmanager.entities.DisciplineEntity;
+import com.greenteam.schoolmanager.entities.CompetenceAvaliationEntity;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface DisciplineRepository extends JpaRepository<DisciplineEntity, Long> {
+public interface CompetenceAvaliationRepository extends JpaRepository<CompetenceAvaliationEntity, Long> {
 }

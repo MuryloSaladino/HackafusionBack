@@ -19,7 +19,7 @@ public class CompetenceEntityCreationPayload {
     private Float weight;
 
     @NotNull
-    @Positive
+    @PositiveOrZero
     private Long disciplineId;
 
     public CompetenceEntity toEntity() {
