@@ -16,6 +16,9 @@ public class DependenciesConfiguration {
     }
 
     @Bean @Scope() @Primary
+    public LoginService loginService() { return new LoginServiceDefault(); }
+
+    @Bean @Scope() @Primary
     public StudentGangService studentGangService() { return new StudentGangServiceDefault(); }
 
     @Bean @Scope() @Primary
