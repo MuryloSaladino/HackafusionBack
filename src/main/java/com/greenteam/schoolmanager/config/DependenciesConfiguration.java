@@ -10,36 +10,44 @@ import org.springframework.web.context.WebApplicationContext;
 @Configuration
 public class DependenciesConfiguration {
 
+    // # UTILITY BEANS
     @Bean @Scope() @Primary
     public JwtTokenManager jwtTokenManager() {
         return new JwtTokenManagerDefault();
     }
-
     @Bean @Scope() @Primary
-    public StudentGangDisciplineService studentGangDisciplineService() { return new StudentGangDisciplineServiceDefault(); }
+    public BCryptPasswordEncoder passwordEncoder() {
+        return new BCryptPasswordEncoder();
+    }
+    @Bean @Scope(value = WebApplicationContext.SCOPE_REQUEST, proxyMode = ScopedProxyMode.TARGET_CLASS) @Primary
+    public UserSession userSession() {
+        return new UserSession();
+    }
 
+
+    // # DATABASE SERVICE BEANS
     @Bean @Scope() @Primary
-    public LoginService loginService() { return new LoginServiceDefault(); }
-
-    @Bean @Scope() @Primary
-    public StudentGangService studentGangService() { return new StudentGangServiceDefault(); }
-
+    public LoginService loginService() {
+        return new LoginServiceDefault();
+    }
     @Bean @Scope() @Primary
     public UserEntityService userEntityService() {
         return new UserEntityServiceDefault();
     }
-
+    @Bean @Scope() @Primary
+    public StudentGangDisciplineService studentGangDisciplineService() {
+        return new StudentGangDisciplineServiceDefault();
+    }
+    @Bean @Scope() @Primary
+    public StudentGangService studentGangService() {
+        return new StudentGangServiceDefault();
+    }
     @Bean @Scope() @Primary
     public AvaliationEntityService avaliationEntityService() {
         return new AvaliationEntityServiceDefault();
     }
-
     @Bean @Scope() @Primary
-    public DisciplineEntityService disciplineEntityService() { return new DisciplineEntityServiceDefault(); }
-
-    @Bean @Scope() @Primary
-    public BCryptPasswordEncoder passwordEncoder() { return new BCryptPasswordEncoder(); }
-
-    @Bean @Scope(value = WebApplicationContext.SCOPE_REQUEST, proxyMode = ScopedProxyMode.TARGET_CLASS) @Primary
-    public UserSession userSession() { return new UserSession(); }
+    public DisciplineEntityService disciplineEntityService() {
+        return new DisciplineEntityServiceDefault();
+    }
 }
