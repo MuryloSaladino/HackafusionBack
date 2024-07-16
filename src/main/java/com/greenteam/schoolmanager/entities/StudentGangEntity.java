@@ -14,6 +14,15 @@ public class StudentGangEntity extends BaseEntity {
     private String name;
 
 
+    public StudentGangEntity() {}
+
+    public StudentGangEntity(DisciplineType mainDisciplineType, String name) {
+        super();
+        this.mainDisciplineType = mainDisciplineType;
+        this.name = name;
+    }
+
+
     public void setMainDisciplineType(DisciplineType mainDisciplineType) {
         this.update();
         this.mainDisciplineType = mainDisciplineType;
