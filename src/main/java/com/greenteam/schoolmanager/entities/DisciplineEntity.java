@@ -20,6 +20,16 @@ public class DisciplineEntity extends BaseEntity {
     private DisciplineType type;
 
 
+    public DisciplineEntity() {}
+
+    public DisciplineEntity(String name, String description, Float workload, DisciplineType type) {
+        super();
+        this.name = name;
+        this.description = description;
+        this.workload = workload;
+        this.type = type;
+    }
+
     public void setName(String name) {
         this.update();
         this.name = name;
@@ -28,5 +38,15 @@ public class DisciplineEntity extends BaseEntity {
     public void setType(DisciplineType type) {
         this.update();
         this.type = type;
+    }
+
+    public void setDescription(String description) {
+        this.update();
+        this.description = description;
+    }
+
+    public void setWorkload(Float workload) {
+        this.update();
+        this.workload = workload;
     }
 }

@@ -1,7 +1,9 @@
 package com.greenteam.schoolmanager.config;
 
+import com.greenteam.schoolmanager.interfaces.DisciplineEntityService;
 import com.greenteam.schoolmanager.interfaces.JwtTokenManager;
 import com.greenteam.schoolmanager.interfaces.UserEntityService;
+import com.greenteam.schoolmanager.services.DisciplineEntityServiceDefault;
 import com.greenteam.schoolmanager.services.JwtTokenManagerDefault;
 import com.greenteam.schoolmanager.services.UserEntityServiceDefault;
 import com.greenteam.schoolmanager.sessions.UserSession;
@@ -21,6 +23,9 @@ public class DependenciesConfiguration {
     public UserEntityService userEntityService() {
         return new UserEntityServiceDefault();
     }
+
+    @Bean @Scope() @Primary
+    public DisciplineEntityService disciplineEntityService() { return new DisciplineEntityServiceDefault(); }
 
     @Bean @Scope() @Primary
     public BCryptPasswordEncoder passwordEncoder() { return new BCryptPasswordEncoder(); }
