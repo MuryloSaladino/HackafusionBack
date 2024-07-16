@@ -1,4 +1,4 @@
-spring.application.name=realstatemanager
+spring.application.name=schoolmanager
 
 # Database config access
 spring.datasource.url=<DATASOURCE_URL>
