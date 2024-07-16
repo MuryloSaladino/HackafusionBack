@@ -19,12 +19,8 @@ public class AvaliationEntityCreationPayload {
     @Positive
     private Long disciplineId;
 
-    @NotNull
-    @Pattern(regexp = "\\b(QUALIFIED|UNQUALIFIED|LEARNING)\\b")
-    private String status;
-
 
     public AvaliationEntity toEntity() {
-        return new AvaliationEntity(CompetenceLevel.valueOf(status));
+        return new AvaliationEntity();
     }
 }

@@ -14,7 +14,7 @@ public class CompetenceAvaliationEntityUpdatePayload {
 
     @NotNull
     @Pattern(regexp = "\\b(QUALIFIED|UNQUALIFIED|LEARNING)\\b")
-    private String competence;
+    private String status;
 
     @NotNull
     @PositiveOrZero

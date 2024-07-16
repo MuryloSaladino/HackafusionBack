@@ -9,7 +9,7 @@ import lombok.Setter;
 public class CompetenceAvaliationEntity extends BaseEntity {
 
     @Column() @Enumerated(EnumType.STRING)
-    private CompetenceLevel competenceLevel;
+    private CompetenceLevel status;
 
     @ManyToOne @JoinColumn(nullable = false)
     @Setter
@@ -20,13 +20,13 @@ public class CompetenceAvaliationEntity extends BaseEntity {
     private AvaliationEntity avaliationEntity;
 
 
-    public void setCompetenceLevel(CompetenceLevel competenceLevel) {
+    public void setStatus(CompetenceLevel competenceLevel) {
         this.update();
-        this.competenceLevel = competenceLevel;
+        this.status = competenceLevel;
     }
 
     public CompetenceAvaliationEntity() {}
-    public CompetenceAvaliationEntity(String competenceLevel) {
-        this.competenceLevel = CompetenceLevel.valueOf(competenceLevel);
+    public CompetenceAvaliationEntity(String status) {
+        this.status = CompetenceLevel.valueOf(status);
     }
 }

@@ -63,7 +63,7 @@ public class CompetenceAvaliationServiceDefault implements CompetenceAvaliationE
 
         var entity = query.get();
 
-        if (payload.getCompetence() != null) entity.setCompetenceLevel(CompetenceLevel.valueOf(payload.getCompetence()));
+        if (payload.getStatus() != null) entity.setStatus(CompetenceLevel.valueOf(payload.getStatus()));
 
         if (payload.getCompetenceEntityId() != null) {
             var q = competenceRepository.findById((payload.getCompetenceEntityId()));
