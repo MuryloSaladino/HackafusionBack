@@ -1,9 +1,7 @@
 package com.greenteam.schoolmanager.entities;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.ManyToOne;
-import jakarta.persistence.Table;
+import com.greenteam.schoolmanager.enums.CompetenceLevel;
+import jakarta.persistence.*;
 import lombok.Getter;
 
 @Entity @Table @Getter
@@ -14,4 +12,12 @@ public class AvaliationEntity extends BaseEntity {
 
     @ManyToOne @JoinColumn(nullable = false)
     private DisciplineEntity disciplineEntity;
+
+    @Column @Enumerated(EnumType.STRING)
+    private CompetenceLevel status;
+
+    public void setStatus(CompetenceLevel status) {
+        this.update();
+        this.status = status;
+    }
 }
