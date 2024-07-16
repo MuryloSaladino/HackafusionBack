@@ -1,7 +1,5 @@
 package com.greenteam.schoolmanager.interfaces;
 
-
-
 import com.greenteam.schoolmanager.dto.avaliation.CompetenceAvaliationEntityCreationPayload;
 import com.greenteam.schoolmanager.dto.avaliation.CompetenceAvaliationEntityUpdatePayload;
 import com.greenteam.schoolmanager.entities.CompetenceAvaliationEntity;
