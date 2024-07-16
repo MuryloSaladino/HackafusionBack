@@ -38,6 +38,9 @@ public class StudentGangDisciplineServiceDefault implements StudentGangDisciplin
         var studentGang = gangQuery.get();
         var discipline = disciplineQuery.get();
 
+        newStudentGangDiscipline.setGang(studentGang);
+        newStudentGangDiscipline.setDiscipline(discipline);
+
         return studentGangDisciplineRepository.save(newStudentGangDiscipline);
     }
 }
