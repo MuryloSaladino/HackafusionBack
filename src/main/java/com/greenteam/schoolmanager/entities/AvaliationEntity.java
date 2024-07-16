@@ -13,11 +13,14 @@ public class AvaliationEntity extends BaseEntity {
     @ManyToOne @JoinColumn(nullable = false)
     private DisciplineEntity disciplineEntity;
 
-    @Column @Enumerated(EnumType.STRING)
-    private CompetenceLevel status;
 
-    public void setStatus(CompetenceLevel status) {
+    public void setUser(UserEntity user) {
         this.update();
-        this.status = status;
+        this.user = user;
+    }
+
+    public void setDiscipline (DisciplineEntity discipline) {
+        this.update();
+        this.disciplineEntity = discipline;
     }
 }
