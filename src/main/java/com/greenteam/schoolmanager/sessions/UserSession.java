@@ -21,7 +21,6 @@ public class UserSession {
     public void verifyInstructorOrAdmin() {
         verifyToken();
         if (userRole.equals(UserRole.STUDENT)) throw new ForbiddenException();
-
     }
 
     public void verifyToken() {
