@@ -84,4 +84,13 @@ public class UserController {
                         .toList()
         );
     }
+
+    @GetMapping("/{id}")
+    protected ResponseEntity<UserEntityResponse> getUserFromId(
+            @PathVariable Long id
+    ) {
+        userSession.verifyOwnUserOrAdmin(id);
+
+        return ResponseEntity.ok(new UserEntityResponse( userEntityService.getById(id) ));
+    }
 }
