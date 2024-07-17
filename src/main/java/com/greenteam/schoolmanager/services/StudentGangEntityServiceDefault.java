@@ -52,7 +52,7 @@ public class StudentGangEntityServiceDefault implements StudentGangEntityService
 
         var gang = query.get();
         if(payload.getName() != null) gang.setName(payload.getName());
-        if(payload.getMainDisciplineType() != null) gang.setMainDisciplineType(payload.getMainDisciplineType());
+        if(payload.getMainDisciplineType() != null) gang.setMainDisciplineType(DisciplineType.valueOf(payload.getMainDisciplineType()));
 
         return studentGangRepository.save(gang);
     }

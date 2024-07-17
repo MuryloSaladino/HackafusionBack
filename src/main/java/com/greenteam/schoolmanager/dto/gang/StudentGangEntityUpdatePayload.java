@@ -10,7 +10,7 @@ import lombok.Getter;
 public class StudentGangEntityUpdatePayload {
 
     @Pattern(regexp = "\\b(TI|MECHATRONIC|ADMINISTRATIVE)\\b")
-    private DisciplineType mainDisciplineType;
+    private String mainDisciplineType;
 
     @Size(min = 8, max = 100)
     private String name;

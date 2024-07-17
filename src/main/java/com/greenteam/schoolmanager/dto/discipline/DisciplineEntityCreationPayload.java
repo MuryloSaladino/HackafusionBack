@@ -13,7 +13,7 @@ import lombok.Getter;
 public class DisciplineEntityCreationPayload {
 
     @NotNull
-    @Size(min = 8, max = 50)
+    @Size(min = 4, max = 50)
     private String name;
 
     @Size(max = 200)

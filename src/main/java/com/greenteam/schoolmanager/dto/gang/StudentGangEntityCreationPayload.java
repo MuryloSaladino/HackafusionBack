@@ -15,7 +15,7 @@ public class StudentGangEntityCreationPayload {
     private String mainDisciplineType;
 
     @NotNull
-    @Size(min = 8, max = 100)
+    @Size(min = 4, max = 100)
     private String name;
 
 

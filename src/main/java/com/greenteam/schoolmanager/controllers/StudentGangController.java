@@ -81,15 +81,15 @@ public class StudentGangController {
                 .body(new StudentGangEntityResponse( studentGangEntityService.getById(id) ));
     }
 
-    @GetMapping("/mainDiscipline/{disciplineName}")
+    @GetMapping("/mainDiscipline/{disciplineType}")
     protected ResponseEntity<List<StudentGangEntityResponse>> getGangByDiscipline(
-            @PathVariable String disciplineName
+            @PathVariable String disciplineType
     ) {
         userSession.verifyInstructorOrAdmin();
 
         return ResponseEntity.ok(
                 studentGangEntityService
-                        .getByMainDiscipline(disciplineName)
+                        .getByMainDiscipline(disciplineType)
                         .stream()
                         .map(StudentGangEntityResponse::new)
                         .toList()
