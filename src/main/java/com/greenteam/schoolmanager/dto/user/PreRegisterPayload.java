@@ -1,11 +1,13 @@
 package com.greenteam.schoolmanager.dto.user;
 
+import com.greenteam.schoolmanager.entities.PreRegisterEntity;
+import com.greenteam.schoolmanager.enums.UserRole;
 import jakarta.validation.constraints.*;
 import lombok.Data;
 import lombok.Getter;
 
 @Getter @Data
-public class UserCreationCodePayload {
+public class PreRegisterPayload {
 
     @NotNull @Email
     private String email;
@@ -15,4 +17,8 @@ public class UserCreationCodePayload {
 
     @Positive
     private Long studentGangId;
+
+    public PreRegisterEntity toEntity() {
+        return new PreRegisterEntity(email, UserRole.integerToRole(role));
+    }
 }
