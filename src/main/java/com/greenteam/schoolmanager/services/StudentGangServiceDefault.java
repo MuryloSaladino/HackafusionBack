@@ -3,6 +3,7 @@ package com.greenteam.schoolmanager.services;
 import com.greenteam.schoolmanager.dto.gang.StudentGangCreationPayload;
 import com.greenteam.schoolmanager.dto.gang.StudentGangUpdatePayload;
 import com.greenteam.schoolmanager.entities.StudentGangEntity;
+import com.greenteam.schoolmanager.enums.DisciplineType;
 import com.greenteam.schoolmanager.exceptions.NotFoundException;
 import com.greenteam.schoolmanager.interfaces.StudentGangService;
 import com.greenteam.schoolmanager.repositories.StudentGangRepository;
@@ -36,6 +37,12 @@ public class StudentGangServiceDefault implements StudentGangService {
 
     @Override
     public List<StudentGangEntity> getAll() { return (List<StudentGangEntity>) studentGangRepository.findAll(); }
+
+    @Override
+    public List<StudentGangEntity> getByMainDiscipline(String disciplineName) {
+        return studentGangRepository.findByMainDisciplineType(DisciplineType.valueOf(disciplineName));
+    }
+
 
     @Override
     public StudentGangEntity update(Long id, StudentGangUpdatePayload payload) {

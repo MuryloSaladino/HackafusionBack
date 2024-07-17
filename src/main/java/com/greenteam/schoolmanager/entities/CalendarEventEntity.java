@@ -56,4 +56,14 @@ public class CalendarEventEntity extends BaseEntity {
         this.update();
         this.userEntity = userEntity;
     }
+
+    public void setYear(Integer year) {
+        this.update();
+        this.year = year;
+    }
+
+    public void setMonth(Integer month) {
+        this.update();
+        this.month = month;
+    }
 }
