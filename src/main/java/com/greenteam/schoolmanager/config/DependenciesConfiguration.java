@@ -43,10 +43,6 @@ public class DependenciesConfiguration {
         return new StudentGangServiceDefault();
     }
     @Bean @Scope() @Primary
-    public AvaliationEntityService avaliationEntityService() {
-        return new AvaliationEntityServiceDefault();
-    }
-    @Bean @Scope() @Primary
     public CalendarEntityService calendarEntityService() {
         return new CalendarEntityServiceDefault();
     }
