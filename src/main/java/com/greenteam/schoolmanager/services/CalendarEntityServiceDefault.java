@@ -52,8 +52,19 @@ public class CalendarEntityServiceDefault implements CalendarEntityService {
     }
 
     @Override
-    public List<CalendarEventEntity> getAll() {
-        return (List<CalendarEventEntity>) calendarRepository.findAll();
+    public List<CalendarEventEntity> getByDate(Integer year, Integer month) {
+        var query = calendarRepository.findByYearAndMonth(year, month);
+        if(query.isEmpty()) throw new NotFoundException();
+
+        return query;
+    }
+
+    @Override
+    public List<CalendarEventEntity> getByGangAndDate(Long gangId, Integer year, Integer month) {
+        var query = calendarRepository.findByStudentGangEntityIdAndYearAndMonth(gangId, year, month);
+        if(query.isEmpty()) throw new NotFoundException();
+
+        return query;
     }
 
     @Override
@@ -64,7 +75,8 @@ public class CalendarEntityServiceDefault implements CalendarEntityService {
         var calendar = query.get();
         if(payload.getTitle() != null) calendar.setTitle(payload.getTitle());
         if(payload.getDescription() != null) calendar.setDescription(payload.getDescription());
-        if(payload.getDate() != null) calendar.setDate(payload.getDate());
+        if(payload.getYear() != null) calendar.setYear(payload.getYear());
+        if(payload.getMonth() != null) calendar.setMonth(payload.getMonth());
 
         return calendarRepository.save(calendar);
     }

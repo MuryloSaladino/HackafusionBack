@@ -2,6 +2,7 @@ package com.greenteam.schoolmanager.dto.calendar;
 
 import com.greenteam.schoolmanager.entities.CalendarEventEntity;
 import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Positive;
 import jakarta.validation.constraints.Size;
 import lombok.Data;
 import lombok.Getter;
@@ -20,7 +21,12 @@ public class CalendarEntityCreationPayload {
     private String description;
 
     @NotNull
-    private Date date;
+    @Positive
+    private Integer year;
+
+    @NotNull
+    @Positive
+    private Integer month;
 
     @NotNull
     private Long studentGangId;
@@ -28,5 +34,5 @@ public class CalendarEntityCreationPayload {
     @NotNull
     private Long userEntityId;
 
-//    public CalendarEventEntity toEntity() { return new CalendarEventEntity(title, description, ); }
+    public CalendarEventEntity toEntity() { return new CalendarEventEntity(title, description, year, month); }
 }
