@@ -11,6 +11,7 @@ import com.greenteam.schoolmanager.repositories.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.sql.Timestamp;
 import java.util.List;
 
 @Service
@@ -53,12 +54,15 @@ public class CalendarEntityServiceDefault implements CalendarEntityService {
 
     @Override
     public List<CalendarEventEntity> getByDate(Integer year, Integer month) {
-        return calendarRepository.findByYearAndMonth(year, month);
+        return calendarRepository.findByDateMonthAndDateYear(year, month);
     }
 
     @Override
     public List<CalendarEventEntity> getByGangAndDate(Long gangId, Integer year, Integer month) {
-        return calendarRepository.findByStudentGangEntityIdAndYearAndMonth(gangId, year, month);
+        var query = studentGangRepository.findById(gangId);
+        if(query.isEmpty()) throw new NotFoundException();
+
+        return calendarRepository.findByDateMonthAndDateYearAndStudentGangEntity(year, month, query.get());
     }
 
     @Override
@@ -69,8 +73,8 @@ public class CalendarEntityServiceDefault implements CalendarEntityService {
         var calendar = query.get();
         if(payload.getTitle() != null) calendar.setTitle(payload.getTitle());
         if(payload.getDescription() != null) calendar.setDescription(payload.getDescription());
-        if(payload.getYear() != null) calendar.setYear(payload.getYear());
-        if(payload.getMonth() != null) calendar.setMonth(payload.getMonth());
+        if(payload.getDate() != null) calendar.setDate(payload.getDate());
+
 
         return calendarRepository.save(calendar);
     }

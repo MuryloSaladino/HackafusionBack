@@ -3,6 +3,7 @@ package com.greenteam.schoolmanager.entities;
 import jakarta.persistence.*;
 import lombok.Getter;
 
+import java.sql.Timestamp;
 import java.util.Date;
 
 @Table @Entity @Getter
@@ -15,10 +16,8 @@ public class CalendarEventEntity extends BaseEntity {
     private String description;
 
     @Column
-    private Integer year;
-
-    @Column
-    private Integer month;
+    @Temporal(TemporalType.DATE)
+    private Date date;
 
     @ManyToOne @JoinColumn(nullable = false)
     private StudentGangEntity studentGangEntity;
@@ -29,12 +28,11 @@ public class CalendarEventEntity extends BaseEntity {
 
     public CalendarEventEntity(){ };
 
-    public CalendarEventEntity(String title, String description, Integer year, Integer month) {
+    public CalendarEventEntity(String title, String description, Date date) {
         super();
         this.title= title;
         this.description = description;
-        this.year = year;
-        this.month = month;
+        this.date = date;
     }
 
     public void setTitle(String title) {
@@ -57,13 +55,8 @@ public class CalendarEventEntity extends BaseEntity {
         this.userEntity = userEntity;
     }
 
-    public void setYear(Integer year) {
+    public void setDate(Date date) {
         this.update();
-        this.year = year;
-    }
-
-    public void setMonth(Integer month) {
-        this.update();
-        this.month = month;
+        this.date = date;
     }
 }

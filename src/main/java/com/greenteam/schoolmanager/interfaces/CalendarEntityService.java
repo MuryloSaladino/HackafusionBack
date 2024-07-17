@@ -4,6 +4,7 @@ import com.greenteam.schoolmanager.dto.calendar.CalendarEntityCreationPayload;
 import com.greenteam.schoolmanager.dto.calendar.CalendarEntityUpdatePayload;
 import com.greenteam.schoolmanager.entities.CalendarEventEntity;
 
+import java.sql.Timestamp;
 import java.util.List;
 
 public interface CalendarEntityService {
