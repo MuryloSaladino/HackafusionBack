@@ -11,7 +11,7 @@ import java.util.List;
 public interface CompetenceEntityService {
     CompetenceEntity create(CompetenceEntityCreationPayload payload);
     CompetenceEntity getById(Long id);
-    List<CompetenceEntity> getAll();
+    List<CompetenceEntity> getByDiscipline(Long disciplineId);
     CompetenceEntity update(Long id, CompetenceEntityUpdatePayload payload);
     void delete(Long id);
 }

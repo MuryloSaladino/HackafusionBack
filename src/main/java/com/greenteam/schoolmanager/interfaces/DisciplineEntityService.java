@@ -10,6 +10,7 @@ public interface DisciplineEntityService {
     DisciplineEntity create(DisciplineEntityCreationPayload payload);
     DisciplineEntity getById(Long id);
     List<DisciplineEntity> getAll();
+    List<DisciplineEntity> getByGang(Long gangId);
     DisciplineEntity update(Long id, DisciplineEntityUpdatePayload payload);
     void delete(Long id);
 }

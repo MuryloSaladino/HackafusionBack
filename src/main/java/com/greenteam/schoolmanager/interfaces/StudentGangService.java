@@ -10,6 +10,7 @@ public interface StudentGangService {
     StudentGangEntity create(StudentGangCreationPayload payload);
     StudentGangEntity getById(Long id);
     List<StudentGangEntity> getAll();
+    List<StudentGangEntity> getByMainDiscipline(Long disciplineId);
     StudentGangEntity update(Long id, StudentGangUpdatePayload payload);
     void delete(Long id);
 }

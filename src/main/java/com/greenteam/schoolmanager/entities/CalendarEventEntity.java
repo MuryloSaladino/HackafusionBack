@@ -14,8 +14,11 @@ public class CalendarEventEntity extends BaseEntity {
     @Column
     private String description;
 
-    @Column @Temporal(TemporalType.TIMESTAMP)
-    private Date date;
+    @Column
+    private Integer year;
+
+    @Column
+    private Integer month;
 
     @ManyToOne @JoinColumn(nullable = false)
     private StudentGangEntity studentGangEntity;
@@ -26,10 +29,12 @@ public class CalendarEventEntity extends BaseEntity {
 
     public CalendarEventEntity(){ };
 
-    public CalendarEventEntity(String title, String description, Date date) {
+    public CalendarEventEntity(String title, String description, Integer year, Integer month) {
+        super();
         this.title= title;
         this.description = description;
-        this.date = date;
+        this.year = year;
+        this.month = month;
     }
 
     public void setTitle(String title) {
@@ -40,11 +45,6 @@ public class CalendarEventEntity extends BaseEntity {
     public void setDescription(String description) {
         this.update();
         this.description = description;
-    }
-
-    public void setDate(Date date) {
-        this.update();
-        this.date = date;
     }
 
     public void setStudentGangEntity(StudentGangEntity studentGangEntity) {

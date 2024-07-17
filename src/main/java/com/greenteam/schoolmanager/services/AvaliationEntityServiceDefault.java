@@ -3,7 +3,6 @@ package com.greenteam.schoolmanager.services;
 import com.greenteam.schoolmanager.dto.avaliation.AvaliationEntityCreationPayload;
 import com.greenteam.schoolmanager.entities.AvaliationEntity;
 import com.greenteam.schoolmanager.exceptions.NotFoundException;
-import com.greenteam.schoolmanager.interfaces.AvaliationEntityService;
 import com.greenteam.schoolmanager.repositories.AvaliationRepository;
 import com.greenteam.schoolmanager.repositories.DisciplineRepository;
 import com.greenteam.schoolmanager.repositories.UserRepository;
