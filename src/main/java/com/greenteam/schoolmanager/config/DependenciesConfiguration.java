@@ -31,6 +31,8 @@ public class DependenciesConfiguration {
         return new UserEntityServiceDefault();
     }
     @Bean @Scope() @Primary
+    public PreRegisterService preRegisterService() { return new PreRegisterServiceDefault(); }
+    @Bean @Scope() @Primary
     public StudentGangDisciplineEntityService studentGangDisciplineService() {
         return new StudentGangDisciplineEntityServiceDefault();
     }

@@ -1,9 +1,11 @@
 package com.greenteam.schoolmanager.controllers;
 
+import com.greenteam.schoolmanager.dto.ResponseMessage;
+import com.greenteam.schoolmanager.dto.register.PreRegisterPayload;
 import com.greenteam.schoolmanager.dto.user.UserEntityCreationPayload;
 import com.greenteam.schoolmanager.dto.user.UserEntityResponse;
 import com.greenteam.schoolmanager.dto.user.UserEntityUpdatePayload;
-import com.greenteam.schoolmanager.interfaces.JwtTokenManager;
+import com.greenteam.schoolmanager.interfaces.PreRegisterService;
 import com.greenteam.schoolmanager.interfaces.UserEntityService;
 import com.greenteam.schoolmanager.sessions.UserSession;
 import jakarta.validation.Valid;
@@ -22,8 +24,10 @@ public class UserController {
     @Autowired
     private UserSession userSession;
 
+    @Autowired
+    private PreRegisterService preRegisterService;
 
-// =============================================================================================================
+
     @GetMapping("/admincreate")
     protected ResponseEntity<UserEntityResponse> getAdminUser() {
         try {
@@ -39,16 +43,14 @@ public class UserController {
             return ResponseEntity.status(201).body(new UserEntityResponse(userEntityService.create(payload)));
         }
     }
-// =============================================================================================================
-
 
     @PostMapping
-    protected ResponseEntity<UserEntityResponse> createUserFromCode(
-            @Valid @RequestBody UserEntityCreationPayload body,
-            @RequestHeader("Authorization") String creationToken
+    protected ResponseEntity<UserEntityResponse> createUserFromPreRegister(
+            @Valid @RequestBody UserEntityCreationPayload body
     ) {
+        userSession.verifyAdmin();
 
-        return null;
+        return ResponseEntity.ok(new UserEntityResponse( userEntityService.create(body) ));
     }
 
     @PatchMapping("/{id}")

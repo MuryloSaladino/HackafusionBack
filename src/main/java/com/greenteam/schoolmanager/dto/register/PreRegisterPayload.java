@@ -1,4 +1,4 @@
-package com.greenteam.schoolmanager.dto.user;
+package com.greenteam.schoolmanager.dto.register;
 
 import com.greenteam.schoolmanager.entities.PreRegisterEntity;
 import com.greenteam.schoolmanager.enums.UserRole;

@@ -1,9 +1,7 @@
 package com.greenteam.schoolmanager.services;
 
-import com.greenteam.schoolmanager.dto.user.PreRegisterPayload;
 import com.greenteam.schoolmanager.dto.user.UserEntityCreationPayload;
 import com.greenteam.schoolmanager.dto.user.UserEntityUpdatePayload;
-import com.greenteam.schoolmanager.entities.PreRegisterEntity;
 import com.greenteam.schoolmanager.entities.UserEntity;
 import com.greenteam.schoolmanager.enums.UserRole;
 import com.greenteam.schoolmanager.exceptions.NotFoundException;
