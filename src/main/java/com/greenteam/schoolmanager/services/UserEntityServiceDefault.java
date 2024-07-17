@@ -78,6 +78,11 @@ public class UserEntityServiceDefault implements UserEntityService {
     }
 
     @Override
+    public List<UserEntity> getStudentsByGang(Long gangId) {
+        return userRepository.findByStudentGangId(gangId);
+    }
+
+    @Override
     public UserEntity update(Long id, UserEntityUpdatePayload payload) {
 
         var query = userRepository.findById(id);

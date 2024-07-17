@@ -5,6 +5,7 @@ import com.greenteam.schoolmanager.dto.register.PreRegisterPayload;
 import com.greenteam.schoolmanager.dto.register.PreRegisterResponse;
 import com.greenteam.schoolmanager.dto.user.UserEntityCreationPayload;
 import com.greenteam.schoolmanager.dto.user.UserEntityResponse;
+import com.greenteam.schoolmanager.exceptions.BadRequestException;
 import com.greenteam.schoolmanager.interfaces.PreRegisterService;
 import com.greenteam.schoolmanager.interfaces.UserEntityService;
 import com.greenteam.schoolmanager.sessions.UserSession;
@@ -29,6 +30,9 @@ public class RegisterController {
     @PostMapping("/pre")
     protected ResponseEntity<ResponseMessage> preRegister(@Valid @RequestBody PreRegisterPayload body) {
         userSession.verifyAdmin();
+
+        if(body.getRole().equals(2) && body.getStudentGangId() == null)
+            throw new BadRequestException("Student needs a student gang");
 
         preRegisterService.createPreRegister(body);
         return ResponseEntity.ok(new ResponseMessage("Email registered successfully"));

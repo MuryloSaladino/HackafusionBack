@@ -7,7 +7,6 @@ import com.greenteam.schoolmanager.entities.UserEntity;
 import com.greenteam.schoolmanager.enums.UserRole;
 import com.greenteam.schoolmanager.exceptions.BadRequestException;
 import com.greenteam.schoolmanager.exceptions.NotFoundException;
-import com.greenteam.schoolmanager.interfaces.JwtTokenManager;
 import com.greenteam.schoolmanager.interfaces.PreRegisterService;
 import com.greenteam.schoolmanager.repositories.PreRegisterRepository;
 import com.greenteam.schoolmanager.repositories.StudentGangRepository;

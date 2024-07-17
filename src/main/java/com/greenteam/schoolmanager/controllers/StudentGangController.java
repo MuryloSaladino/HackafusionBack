@@ -3,7 +3,9 @@ package com.greenteam.schoolmanager.controllers;
 import com.greenteam.schoolmanager.dto.gang.StudentGangEntityCreationPayload;
 import com.greenteam.schoolmanager.dto.gang.StudentGangEntityResponse;
 import com.greenteam.schoolmanager.dto.gang.StudentGangEntityUpdatePayload;
+import com.greenteam.schoolmanager.dto.user.UserEntityResponse;
 import com.greenteam.schoolmanager.interfaces.StudentGangEntityService;
+import com.greenteam.schoolmanager.interfaces.UserEntityService;
 import com.greenteam.schoolmanager.sessions.UserSession;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,6 +23,9 @@ public class StudentGangController {
 
     @Autowired
     private StudentGangEntityService studentGangEntityService;
+
+    @Autowired
+    private UserEntityService userEntityService;
 
 
     @PostMapping
@@ -92,6 +97,21 @@ public class StudentGangController {
                         .getByMainDiscipline(disciplineType)
                         .stream()
                         .map(StudentGangEntityResponse::new)
+                        .toList()
+        );
+    }
+
+    @GetMapping("/student/{id}")
+    protected ResponseEntity<List<UserEntityResponse>> getUsersByGangId(
+            @PathVariable long id
+    ) {
+        userSession.verifyInstructorOrAdmin();
+
+        return ResponseEntity.ok(
+                userEntityService
+                        .getStudentsByGang(id)
+                        .stream()
+                        .map(UserEntityResponse::new)
                         .toList()
         );
     }
