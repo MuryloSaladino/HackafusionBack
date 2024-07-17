@@ -9,8 +9,8 @@ import org.springframework.stereotype.Service;
 @Service
 public class EmailServiceDefault implements EmailService {
 
-    @Autowired
-    private JavaMailSender mailSender;
+//    @Autowired
+//    private JavaMailSender mailSender;
 
     public void sendToken(String destination, String token) {
 
@@ -23,6 +23,6 @@ public class EmailServiceDefault implements EmailService {
                 "<a href=\"localhost:5173/signup/"+token+"\">Register</a>"
         );
 
-        mailSender.send(message);
+//        mailSender.send(message);
     }
 }
