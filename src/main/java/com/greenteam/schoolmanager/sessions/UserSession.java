@@ -18,6 +18,12 @@ public class UserSession {
         if(!userRole.equals(UserRole.ADMIN)) throw new ForbiddenException();
     }
 
+    public void verifyInstructorOrAdmin() {
+        verifyToken();
+        if (userRole.equals(UserRole.STUDENT)) throw new ForbiddenException();
+
+    }
+
     public void verifyToken() {
         if(id == null) throw new UnauthorizedException();
     }

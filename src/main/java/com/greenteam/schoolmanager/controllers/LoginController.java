@@ -5,6 +5,7 @@ import com.greenteam.schoolmanager.dto.login.LoginResponse;
 import com.greenteam.schoolmanager.entities.UserEntity;
 import com.greenteam.schoolmanager.interfaces.LoginService;
 import com.greenteam.schoolmanager.interfaces.UserEntityService;
+import com.greenteam.schoolmanager.sessions.UserSession;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -21,6 +22,7 @@ public class LoginController {
 
     @Autowired
     UserEntityService userEntityService;
+
 
     @PostMapping
     public ResponseEntity<LoginResponse> login(@Valid @RequestBody LoginPayload body) {
