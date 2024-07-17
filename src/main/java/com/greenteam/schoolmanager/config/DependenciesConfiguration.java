@@ -35,12 +35,12 @@ public class DependenciesConfiguration {
         return new UserEntityServiceDefault();
     }
     @Bean @Scope() @Primary
-    public StudentGangDisciplineService studentGangDisciplineService() {
-        return new StudentGangDisciplineServiceDefault();
+    public StudentGangDisciplineEntityService studentGangDisciplineService() {
+        return new StudentGangDisciplineEntityServiceDefault();
     }
     @Bean @Scope() @Primary
-    public StudentGangService studentGangService() {
-        return new StudentGangServiceDefault();
+    public StudentGangEntityService studentGangService() {
+        return new StudentGangEntityServiceDefault();
     }
     @Bean @Scope() @Primary
     public CalendarEntityService calendarEntityService() {

@@ -2,17 +2,15 @@ package com.greenteam.schoolmanager.services;
 
 import com.greenteam.schoolmanager.entities.StudentGangDisciplineEntity;
 import com.greenteam.schoolmanager.exceptions.NotFoundException;
-import com.greenteam.schoolmanager.interfaces.StudentGangDisciplineService;
+import com.greenteam.schoolmanager.interfaces.StudentGangDisciplineEntityService;
 import com.greenteam.schoolmanager.repositories.DisciplineRepository;
 import com.greenteam.schoolmanager.repositories.StudentGangDisciplineRepository;
 import com.greenteam.schoolmanager.repositories.StudentGangRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
-
 @Service
-public class StudentGangDisciplineServiceDefault implements StudentGangDisciplineService {
+public class StudentGangDisciplineEntityServiceDefault implements StudentGangDisciplineEntityService {
 
     @Autowired
     StudentGangDisciplineRepository studentGangDisciplineRepository;
