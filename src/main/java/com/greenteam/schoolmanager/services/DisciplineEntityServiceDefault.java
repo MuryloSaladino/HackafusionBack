@@ -2,14 +2,13 @@ package com.greenteam.schoolmanager.services;
 
 import com.greenteam.schoolmanager.dto.discipline.DisciplineEntityCreationPayload;
 import com.greenteam.schoolmanager.dto.discipline.DisciplineEntityUpdatePayload;
+import com.greenteam.schoolmanager.entities.AvaliationEntity;
 import com.greenteam.schoolmanager.entities.DisciplineEntity;
 import com.greenteam.schoolmanager.entities.StudentGangDisciplineEntity;
 import com.greenteam.schoolmanager.enums.DisciplineType;
 import com.greenteam.schoolmanager.exceptions.NotFoundException;
 import com.greenteam.schoolmanager.interfaces.DisciplineEntityService;
-import com.greenteam.schoolmanager.repositories.DisciplineRepository;
-import com.greenteam.schoolmanager.repositories.StudentGangDisciplineRepository;
-import com.greenteam.schoolmanager.repositories.StudentGangRepository;
+import com.greenteam.schoolmanager.repositories.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -26,6 +25,13 @@ public class DisciplineEntityServiceDefault implements DisciplineEntityService {
 
     @Autowired
     StudentGangDisciplineRepository studentGangDisciplineRepository;
+
+    @Autowired
+    AvaliationRepository avaliationRepository;
+
+    @Autowired
+    UserRepository userRepository;
+
 
     @Override
     public DisciplineEntity create(DisciplineEntityCreationPayload payload) {
@@ -56,6 +62,19 @@ public class DisciplineEntityServiceDefault implements DisciplineEntityService {
                 .findByGang(query.get())
                 .stream()
                 .map(StudentGangDisciplineEntity::getDiscipline)
+                .toList();
+    }
+
+    @Override
+    public List<DisciplineEntity> getByStudent(Long studentId) {
+
+        var query = userRepository.findById(studentId);
+        if(query.isEmpty()) throw new NotFoundException();
+
+        return avaliationRepository
+                .findByUser(query.get())
+                .stream()
+                .map(AvaliationEntity::getDisciplineEntity)
                 .toList();
     }
 

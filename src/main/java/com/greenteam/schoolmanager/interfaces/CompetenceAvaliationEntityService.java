@@ -9,7 +9,6 @@ import java.util.List;
 public interface CompetenceAvaliationEntityService {
     CompetenceAvaliationEntity create(CompetenceAvaliationEntityCreationPayload payload);
     CompetenceAvaliationEntity getById(Long id);
-    List<CompetenceAvaliationEntity> getByStudent(Long studentId);
     CompetenceAvaliationEntity update(Long id, CompetenceAvaliationEntityUpdatePayload payload);
     void delete(Long id);
 }
