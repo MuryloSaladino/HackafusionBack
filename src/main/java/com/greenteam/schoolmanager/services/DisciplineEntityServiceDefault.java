@@ -3,10 +3,13 @@ package com.greenteam.schoolmanager.services;
 import com.greenteam.schoolmanager.dto.discipline.DisciplineEntityCreationPayload;
 import com.greenteam.schoolmanager.dto.discipline.DisciplineEntityUpdatePayload;
 import com.greenteam.schoolmanager.entities.DisciplineEntity;
+import com.greenteam.schoolmanager.entities.StudentGangDisciplineEntity;
 import com.greenteam.schoolmanager.enums.DisciplineType;
 import com.greenteam.schoolmanager.exceptions.NotFoundException;
 import com.greenteam.schoolmanager.interfaces.DisciplineEntityService;
 import com.greenteam.schoolmanager.repositories.DisciplineRepository;
+import com.greenteam.schoolmanager.repositories.StudentGangDisciplineRepository;
+import com.greenteam.schoolmanager.repositories.StudentGangRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -17,6 +20,12 @@ public class DisciplineEntityServiceDefault implements DisciplineEntityService {
 
     @Autowired
     DisciplineRepository disciplineRepository;
+
+    @Autowired
+    StudentGangRepository gangRepository;
+
+    @Autowired
+    StudentGangDisciplineRepository studentGangDisciplineRepository;
 
     @Override
     public DisciplineEntity create(DisciplineEntityCreationPayload payload) {
@@ -35,6 +44,19 @@ public class DisciplineEntityServiceDefault implements DisciplineEntityService {
     @Override
     public List<DisciplineEntity> getAll() {
         return (List<DisciplineEntity>) disciplineRepository.findAll();
+    }
+
+    @Override
+    public List<DisciplineEntity> getByGang(Long gangId) {
+
+        var query = gangRepository.findById(gangId);
+        if(query.isEmpty()) throw new NotFoundException();
+
+        return studentGangDisciplineRepository
+                .findByGang(query.get())
+                .stream()
+                .map(StudentGangDisciplineEntity::getDiscipline)
+                .toList();
     }
 
     @Override
