@@ -12,6 +12,7 @@ public interface UserEntityService {
     UserEntity getByUsernameOrEmail(String usernameOrEmail);
     List<UserEntity> getAll();
     List<UserEntity> getStudentsByGang(Long gangId);
+    List<UserEntity> getAllStudents();
     UserEntity update(Long id, UserEntityUpdatePayload payload);
     void delete(Long id);
 }

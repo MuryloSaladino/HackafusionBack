@@ -115,4 +115,17 @@ public class StudentGangController {
                         .toList()
         );
     }
+
+    @GetMapping("/student")
+    protected ResponseEntity<List<UserEntityResponse>> getAllStudents() {
+        userSession.verifyInstructorOrAdmin();
+
+        return ResponseEntity.ok(
+                userEntityService
+                        .getAllStudents()
+                        .stream()
+                        .map(UserEntityResponse::new)
+                        .toList()
+        );
+    }
 }
