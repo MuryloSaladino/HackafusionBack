@@ -42,7 +42,6 @@ public class DependenciesConfiguration {
     public StudentGangService studentGangService() {
         return new StudentGangServiceDefault();
     }
-
     @Bean @Scope() @Primary
     public CalendarEntityService calendarEntityService() {
         return new CalendarEntityServiceDefault();

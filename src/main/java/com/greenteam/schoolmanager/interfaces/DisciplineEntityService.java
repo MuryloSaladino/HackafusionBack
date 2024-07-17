@@ -11,6 +11,7 @@ public interface DisciplineEntityService {
     DisciplineEntity getById(Long id);
     List<DisciplineEntity> getAll();
     List<DisciplineEntity> getByGang(Long gangId);
+    List<DisciplineEntity> getByStudent(Long studentId);
     DisciplineEntity update(Long id, DisciplineEntityUpdatePayload payload);
     void delete(Long id);
 }
