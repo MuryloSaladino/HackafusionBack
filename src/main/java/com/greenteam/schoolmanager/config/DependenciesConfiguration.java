@@ -15,8 +15,8 @@ public class DependenciesConfiguration {
     public JwtTokenManager jwtTokenManager() {
         return new JwtTokenManagerDefault();
     }
-    @Bean @Scope() @Primary
-    public EmailService emailService() { return new EmailServiceDefault(); }
+//    @Bean @Scope() @Primary
+//    public EmailService emailService() { return new EmailServiceDefault(); }
     @Bean @Scope() @Primary
     public BCryptPasswordEncoder passwordEncoder() { return new BCryptPasswordEncoder(); }
     @Bean @Scope(value = WebApplicationContext.SCOPE_REQUEST, proxyMode = ScopedProxyMode.TARGET_CLASS) @Primary

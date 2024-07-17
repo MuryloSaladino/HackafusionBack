@@ -24,13 +24,13 @@ public class UserController {
     private UserEntityService userEntityService;
 
     @Autowired
-    private EmailService emailService;
-
-    @Autowired
     private UserSession userSession;
 
     @Autowired
     private JwtTokenManager jwtTokenManager;
+
+//    @Autowired
+//    private EmailService emailService;
 
 
     @GetMapping("/admincreate")
@@ -59,23 +59,23 @@ public class UserController {
         return null;
     }
 
-    @PostMapping("/sendCode")
-    protected ResponseEntity<ResponseMessage> adminCreateUser(
-            @Valid @RequestBody UserCreationCodePayload body
-    ) {
-        userSession.verifyAdmin();
-
-        Map<String, Object> claims = new HashMap<>();
-        claims.put("creationRole", body.getRole());
-
-        if(body.getRole().equals(2)) {
-            if(body.getStudentGangId() == null) throw new BadRequestException("You need to provide a student gang ID");
-            claims.put("studentGangId", body.getStudentGangId());
-        }
-
-        String token = jwtTokenManager.buildToken(claims, "admin", userSession.getId());
-        emailService.sendToken(body.getEmail(), token);
-
-        return ResponseEntity.ok(new ResponseMessage("Email sent to user"));
-    }
+//    @PostMapping("/sendCode")
+//    protected ResponseEntity<ResponseMessage> adminCreateUser(
+//            @Valid @RequestBody UserCreationCodePayload body
+//    ) {
+//        userSession.verifyAdmin();
+//
+//        Map<String, Object> claims = new HashMap<>();
+//        claims.put("creationRole", body.getRole());
+//
+//        if(body.getRole().equals(2)) {
+//            if(body.getStudentGangId() == null) throw new BadRequestException("You need to provide a student gang ID");
+//            claims.put("studentGangId", body.getStudentGangId());
+//        }
+//
+//        String token = jwtTokenManager.buildToken(claims, "admin", userSession.getId());
+//        emailService.sendToken(body.getEmail(), token);
+//
+//        return ResponseEntity.ok(new ResponseMessage("Email sent to user"));
+//    }
 }
