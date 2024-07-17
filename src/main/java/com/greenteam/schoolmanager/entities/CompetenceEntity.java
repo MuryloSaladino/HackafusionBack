@@ -36,7 +36,6 @@ public class CompetenceEntity extends BaseEntity {
     }
 
 
-
     public CompetenceEntity(){}
     public CompetenceEntity(String name, String description, Float weight){
         this.name = name;

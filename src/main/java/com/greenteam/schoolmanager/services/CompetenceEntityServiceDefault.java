@@ -47,6 +47,7 @@ public class CompetenceEntityServiceDefault implements CompetenceEntityService {
     @Override
     public List<CompetenceEntity> getByDiscipline(Long disciplineId) {
 
+        return competenceRepository.findByDisciplineEntityId(disciplineId);
     }
 
     @Override
