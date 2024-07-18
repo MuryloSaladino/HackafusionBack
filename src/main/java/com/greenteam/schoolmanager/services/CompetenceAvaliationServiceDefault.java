@@ -18,16 +18,17 @@ import java.util.List;
 public class CompetenceAvaliationServiceDefault implements CompetenceAvaliationEntityService {
 
     @Autowired
-    CompetenceAvaliationRepository competenceAvaliationRepository;
+    private CompetenceAvaliationRepository competenceAvaliationRepository;
 
     @Autowired
-    CompetenceRepository competenceRepository;
+    private CompetenceRepository competenceRepository;
 
     @Autowired
-    AvaliationRepository avaliationRepository;
+    private AvaliationRepository avaliationRepository;
 
     @Autowired
-    UserRepository userRepository;
+    private UserRepository userRepository;
+
     @Autowired
     private DisciplineRepository disciplineRepository;
 
@@ -52,7 +53,9 @@ public class CompetenceAvaliationServiceDefault implements CompetenceAvaliationE
         newAvaliation.setDiscipline(disciplineQuery.get());
         newAvaliation.setUser(userQuery.get());
 
-        entity.setStatus(payload.toEntity().getStatus());
+        newAvaliation = avaliationRepository.save(newAvaliation);
+
+        entity.setStatus(CompetenceLevel.valueOf(payload.getCompetence()));
         entity.setCompetence(competenceQuery.get());
         entity.setAvaliationEntity(newAvaliation);
 
