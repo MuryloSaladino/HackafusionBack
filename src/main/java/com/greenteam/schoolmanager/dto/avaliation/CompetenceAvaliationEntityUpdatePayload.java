@@ -8,19 +8,14 @@ import lombok.Getter;
 
 @Getter @Data
 public class CompetenceAvaliationEntityUpdatePayload {
-    @NotNull
-    @PositiveOrZero
-    private Long competenceAvaliationId;
 
     @NotNull
     @Pattern(regexp = "\\b(QUALIFIED|UNQUALIFIED|LEARNING)\\b")
-    private String status;
+    private String competence;
 
-    @NotNull
     @PositiveOrZero
-    private Long competenceEntityId;
+    private Long competenceId;
 
-    @NotNull
     @PositiveOrZero
-    private Long avaliationEntityId;
+    private Long userId;
 }
