@@ -22,6 +22,7 @@ public class StudentGradesResponse {
             if(avaliation.isEmpty()) continue;
 
             avaliations.add(new AvaliationRecord(
+                    avaliation.getFirst().getAvaliationEntity().getId(),
                     new DisciplineEntityResponse(avaliation.getFirst().getAvaliationEntity().getDisciplineEntity()),
                     avaliation.stream().map(CompetenceAvaliationEntityResponse::new).toList()
             ));
@@ -30,6 +31,7 @@ public class StudentGradesResponse {
 
 
     private record AvaliationRecord(
+            Long id,
             DisciplineEntityResponse discipline,
             List<CompetenceAvaliationEntityResponse> competences
     ) {}

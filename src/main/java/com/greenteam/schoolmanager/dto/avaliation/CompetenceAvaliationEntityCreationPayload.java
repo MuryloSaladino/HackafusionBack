@@ -9,7 +9,7 @@ import lombok.Getter;
 public class CompetenceAvaliationEntityCreationPayload {
     @NotNull
     @Pattern(regexp = "\\b(QUALIFIED|UNQUALIFIED|LEARNING)\\b")
-    private String competence;
+    private String status;
     
     @NotNull
     @PositiveOrZero

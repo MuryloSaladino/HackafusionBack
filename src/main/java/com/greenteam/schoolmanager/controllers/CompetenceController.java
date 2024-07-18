@@ -90,7 +90,7 @@ public class CompetenceController {
     }
 
     @GetMapping("/student/{userId}")
-    protected ResponseEntity<StudentGradesResponse> getCompetenceByUser(
+    protected ResponseEntity<?> getCompetenceByUser(
             @PathVariable Long userId
     ) {
         userSession.verifyAdminOrInstructorOrOwnUser(userId);

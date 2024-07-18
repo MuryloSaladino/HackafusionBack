@@ -41,7 +41,6 @@ public class CompetenceAvaliationServiceDefault implements CompetenceAvaliationE
         var competenceQuery = competenceRepository.findById(payload.getCompetenceId());
         if(competenceQuery.isEmpty()) throw new NotFoundException("Competence not found");
 
-
         var disciplineQuery = disciplineRepository.findById(competenceQuery.get().getDisciplineEntity().getId());
         if(disciplineQuery.isEmpty()) throw new NotFoundException("Discipline not found");
 
@@ -49,15 +48,19 @@ public class CompetenceAvaliationServiceDefault implements CompetenceAvaliationE
         if(userQuery.isEmpty()) throw new NotFoundException("User not found");
 
 
-        var newAvaliation = new AvaliationEntity();
-        newAvaliation.setDiscipline(disciplineQuery.get());
-        newAvaliation.setUser(userQuery.get());
+        AvaliationEntity newAvaliation = null;
 
-        newAvaliation = avaliationRepository.save(newAvaliation);
+        var userAvaliationQuery = avaliationRepository.findByUserAndDisciplineEntity(userQuery.get(), disciplineQuery.get());
+        if(userAvaliationQuery.isEmpty()) {
+            newAvaliation = new AvaliationEntity();
+            newAvaliation.setDiscipline(disciplineQuery.get());
+            newAvaliation.setUser(userQuery.get());
+            avaliationRepository.save(newAvaliation);
+        }
 
-        entity.setStatus(CompetenceLevel.valueOf(payload.getCompetence()));
+        entity.setStatus(CompetenceLevel.valueOf(payload.getStatus()));
         entity.setCompetence(competenceQuery.get());
-        entity.setAvaliationEntity(newAvaliation);
+        entity.setAvaliationEntity(newAvaliation == null ? userAvaliationQuery.get() : newAvaliation);
 
         return competenceAvaliationRepository.save(entity);
     }
