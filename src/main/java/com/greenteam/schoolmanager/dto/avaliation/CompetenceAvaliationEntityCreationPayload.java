@@ -15,9 +15,12 @@ public class CompetenceAvaliationEntityCreationPayload {
     @PositiveOrZero
     private Long competenceId;
     
+//    @NotNull
+//    @PositiveOrZero
+//    private Long avaliationId;
+
     @NotNull
-    @PositiveOrZero
-    private Long avaliationId;
+    private Long userId;
 
     public CompetenceAvaliationEntity toEntity() {
         return new CompetenceAvaliationEntity();

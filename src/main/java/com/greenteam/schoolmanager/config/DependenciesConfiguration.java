@@ -23,6 +23,8 @@ public class DependenciesConfiguration {
 
     // # DATABASE SERVICE BEANS
     @Bean @Scope() @Primary
+    public CompetenceAvaliationEntityService competenceAvaliationEntityService() { return new CompetenceAvaliationServiceDefault(); }
+    @Bean @Scope() @Primary
     public LoginService loginService() {
         return new LoginServiceDefault();
     }
