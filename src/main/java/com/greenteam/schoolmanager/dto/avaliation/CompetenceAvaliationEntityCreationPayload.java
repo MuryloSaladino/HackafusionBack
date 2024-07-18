@@ -14,10 +14,6 @@ public class CompetenceAvaliationEntityCreationPayload {
     @NotNull
     @PositiveOrZero
     private Long competenceId;
-    
-//    @NotNull
-//    @PositiveOrZero
-//    private Long avaliationId;
 
     @NotNull
     private Long userId;
