@@ -19,6 +19,6 @@ public class CalendarEntityUpdatePayload {
     @Size(min = 8, max = 100)
     private String description;
 
-    @NotNull @Future
+    @Future
     private Date date;
 }

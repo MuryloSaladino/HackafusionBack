@@ -59,10 +59,7 @@ public class CalendarEntityServiceDefault implements CalendarEntityService {
 
     @Override
     public List<CalendarEventEntity> getByGangAndDate(Long gangId, Integer year, Integer month) {
-        var query = studentGangRepository.findById(gangId);
-        if(query.isEmpty()) throw new NotFoundException();
-
-        return calendarRepository.findByDateMonthAndDateYearAndStudentGangEntity(year, month, query.get());
+        return calendarRepository.findByDateMonthAndDateYearAndStudentGangEntity(year, month, gangId);
     }
 
     @Override

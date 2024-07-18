@@ -82,4 +82,20 @@ public class CalendarController {
                 .toList()
         );
     }
+
+    @GetMapping("/year/{year}/month/{month}/gang/{gang}")
+    protected ResponseEntity<List<CalendarEntityResponse>> getCalendarByYearMonthGang(
+            @PathVariable @Positive Integer year,
+            @PathVariable @Min(1) @Max(12) Integer month,
+            @PathVariable Long gang
+    ) {
+        userSession.verifyInstructorOrAdmin();
+
+        return ResponseEntity.ok(
+                calendarEntityService.getByGangAndDate(gang, year, month)
+                        .stream()
+                        .map(CalendarEntityResponse::new)
+                        .toList()
+        );
+    }
 }

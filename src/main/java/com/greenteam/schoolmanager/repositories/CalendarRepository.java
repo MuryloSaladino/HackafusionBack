@@ -17,6 +17,6 @@ public interface CalendarRepository extends CrudRepository<CalendarEventEntity, 
 
     @Query("select c from CalendarEventEntity c inner join StudentGangEntity s on c.studentGangEntity.id = s.id where year(c.date) = ?1 and month(c.date) = ?2 and s.id = ?3")
     List<CalendarEventEntity> findByDateMonthAndDateYearAndStudentGangEntity(
-            Integer year, Integer month, StudentGangEntity studentGangEntity
+            Integer year, Integer month, Long studentGangEntity
     );
 }
