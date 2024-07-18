@@ -2,13 +2,13 @@ package com.greenteam.schoolmanager.services;
 
 import com.greenteam.schoolmanager.dto.avaliation.CompetenceAvaliationEntityCreationPayload;
 import com.greenteam.schoolmanager.dto.avaliation.CompetenceAvaliationEntityUpdatePayload;
+import com.greenteam.schoolmanager.entities.AvaliationEntity;
 import com.greenteam.schoolmanager.entities.CompetenceAvaliationEntity;
 import com.greenteam.schoolmanager.enums.CompetenceLevel;
 import com.greenteam.schoolmanager.exceptions.NotFoundException;
 import com.greenteam.schoolmanager.interfaces.CompetenceAvaliationEntityService;
-import com.greenteam.schoolmanager.repositories.AvaliationRepository;
-import com.greenteam.schoolmanager.repositories.CompetenceAvaliationRepository;
-import com.greenteam.schoolmanager.repositories.CompetenceRepository;
+import com.greenteam.schoolmanager.interfaces.UserEntityService;
+import com.greenteam.schoolmanager.repositories.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -18,13 +18,19 @@ import java.util.List;
 public class CompetenceAvaliationServiceDefault implements CompetenceAvaliationEntityService {
 
     @Autowired
-    CompetenceAvaliationRepository competenceAvaliationRepository;
+    private CompetenceAvaliationRepository competenceAvaliationRepository;
 
     @Autowired
-    CompetenceRepository competenceRepository;
+    private CompetenceRepository competenceRepository;
 
     @Autowired
-    AvaliationRepository avaliationRepository;
+    private AvaliationRepository avaliationRepository;
+
+    @Autowired
+    private UserRepository userRepository;
+
+    @Autowired
+    private DisciplineRepository disciplineRepository;
 
 
     @Override
@@ -33,13 +39,25 @@ public class CompetenceAvaliationServiceDefault implements CompetenceAvaliationE
         CompetenceAvaliationEntity entity = payload.toEntity();
 
         var competenceQuery = competenceRepository.findById(payload.getCompetenceId());
-        var avaliationQuery = avaliationRepository.findById(payload.getAvaliationId());
-
         if(competenceQuery.isEmpty()) throw new NotFoundException("Competence not found");
-        if(avaliationQuery.isEmpty()) throw new NotFoundException("Avaliation not found");
 
+
+        var disciplineQuery = disciplineRepository.findById(competenceQuery.get().getDisciplineEntity().getId());
+        if(disciplineQuery.isEmpty()) throw new NotFoundException("Discipline not found");
+
+        var userQuery = userRepository.findById(payload.getUserId());
+        if(userQuery.isEmpty()) throw new NotFoundException("User not found");
+
+
+        var newAvaliation = new AvaliationEntity();
+        newAvaliation.setDiscipline(disciplineQuery.get());
+        newAvaliation.setUser(userQuery.get());
+
+        newAvaliation = avaliationRepository.save(newAvaliation);
+
+        entity.setStatus(CompetenceLevel.valueOf(payload.getCompetence()));
         entity.setCompetence(competenceQuery.get());
-        entity.setAvaliationEntity(avaliationQuery.get());
+        entity.setAvaliationEntity(newAvaliation);
 
         return competenceAvaliationRepository.save(entity);
     }
