@@ -79,19 +79,19 @@ public class CompetenceAvaliationServiceDefault implements CompetenceAvaliationE
 
         var entity = query.get();
 
-        if(payload.getStatus() != null) entity.setStatus(CompetenceLevel.valueOf(payload.getStatus()));
+        if(payload.getCompetence() != null) entity.setStatus(CompetenceLevel.valueOf(payload.getCompetence()));
 
-        if(payload.getCompetenceEntityId() != null) {
+        if(payload.getCompetenceId() != null) {
 
-            var q = competenceRepository.findById((payload.getCompetenceEntityId()));
+            var q = competenceRepository.findById((payload.getCompetenceId()));
             if(q.isEmpty()) throw new NotFoundException("Competence not found");
 
             entity.setCompetence(q.get());
         }
 
-        if(payload.getAvaliationEntityId() != null) {
+        if(payload.getUserId() != null) {
 
-            var q = avaliationRepository.findById((payload.getAvaliationEntityId()));
+            var q = avaliationRepository.findById((payload.getUserId()));
             if(q.isEmpty()) throw new NotFoundException("Avaliation not found");
 
             entity.setAvaliationEntity(q.get());
