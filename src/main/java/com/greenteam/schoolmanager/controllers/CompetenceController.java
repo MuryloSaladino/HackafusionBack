@@ -1,11 +1,9 @@
 package com.greenteam.schoolmanager.controllers;
 
-import com.greenteam.schoolmanager.dto.avaliation.CompetenceAvaliationEntityResponse;
 import com.greenteam.schoolmanager.dto.competence.CompetenceEntityCreationPayload;
 import com.greenteam.schoolmanager.dto.competence.CompetenceEntityResponse;
 import com.greenteam.schoolmanager.dto.competence.CompetenceEntityUpdatePayload;
 import com.greenteam.schoolmanager.dto.student.StudentGradesResponse;
-import com.greenteam.schoolmanager.entities.CompetenceAvaliationEntity;
 import com.greenteam.schoolmanager.interfaces.CompetenceEntityService;
 import com.greenteam.schoolmanager.interfaces.UserEntityService;
 import com.greenteam.schoolmanager.sessions.UserSession;
@@ -64,7 +62,7 @@ public class CompetenceController {
     }
 
     @GetMapping("/discipline/{disciplineId}")
-    protected ResponseEntity<List<CompetenceEntityResponse>> getDiscipline(
+    protected ResponseEntity<List<CompetenceEntityResponse>> getCompetencesByDiscipline(
             @PathVariable Long disciplineId
     ) {
         userSession.verifyToken();
@@ -90,7 +88,7 @@ public class CompetenceController {
     }
 
     @GetMapping("/student/{userId}")
-    protected ResponseEntity<StudentGradesResponse> getCompetenceByUser(
+    protected ResponseEntity<StudentGradesResponse> getCompetencesByUser(
             @PathVariable Long userId
     ) {
         userSession.verifyAdminOrInstructorOrOwnUser(userId);
