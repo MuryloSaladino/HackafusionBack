@@ -71,6 +71,8 @@ public class UserController {
     ) {
         userSession.verifyOwnUserOrAdmin(id);
 
+        userEntityService.delete(id);
+
         return ResponseEntity.noContent().build();
     }
 
