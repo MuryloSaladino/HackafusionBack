@@ -101,7 +101,7 @@ public class StudentGangController {
         );
     }
 
-    @GetMapping("/student/{id}")
+    @GetMapping("/students/{id}")
     protected ResponseEntity<List<UserEntityResponse>> getUsersByGangId(
             @PathVariable long id
     ) {
@@ -116,7 +116,7 @@ public class StudentGangController {
         );
     }
 
-    @GetMapping("/student")
+    @GetMapping("/students")
     protected ResponseEntity<List<UserEntityResponse>> getAllStudents() {
         userSession.verifyInstructorOrAdmin();
 
