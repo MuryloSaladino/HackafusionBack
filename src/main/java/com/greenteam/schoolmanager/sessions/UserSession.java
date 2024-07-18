@@ -32,4 +32,12 @@ public class UserSession {
         if(id.equals(userId)) return;
         if(!userRole.equals(UserRole.ADMIN)) throw new ForbiddenException();
     }
+
+    public void verifyAdminOrInstructorOrOwnUser(Long id) {
+        verifyToken();
+
+        if(this.id.equals(id)) return;
+
+        if(userRole.equals(UserRole.STUDENT)) throw new ForbiddenException();
+    }
 }

@@ -9,13 +9,11 @@ public class CompetenceEntityResponse {
     public String name;
     public String description;
     public Float weight;
-    public DisciplineEntityResponse discipline;
 
     public CompetenceEntityResponse(CompetenceEntity competenceEntity) {
         this.id = competenceEntity.getId();
         this.name = competenceEntity.getName();
         this.description = competenceEntity.getDescription();
         this.weight = competenceEntity.getWeight();
-        this.discipline = new DisciplineEntityResponse( competenceEntity.getDisciplineEntity() );
     }
 }

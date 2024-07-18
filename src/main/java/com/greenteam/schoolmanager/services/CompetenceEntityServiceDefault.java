@@ -2,14 +2,15 @@ package com.greenteam.schoolmanager.services;
 
 import com.greenteam.schoolmanager.dto.competence.CompetenceEntityCreationPayload;
 import com.greenteam.schoolmanager.dto.competence.CompetenceEntityUpdatePayload;
+import com.greenteam.schoolmanager.entities.CompetenceAvaliationEntity;
 import com.greenteam.schoolmanager.entities.CompetenceEntity;
 import com.greenteam.schoolmanager.exceptions.NotFoundException;
 import com.greenteam.schoolmanager.interfaces.CompetenceEntityService;
-import com.greenteam.schoolmanager.repositories.CompetenceRepository;
-import com.greenteam.schoolmanager.repositories.DisciplineRepository;
+import com.greenteam.schoolmanager.repositories.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -20,6 +21,15 @@ public class CompetenceEntityServiceDefault implements CompetenceEntityService {
 
     @Autowired
     DisciplineRepository disciplineRepository;
+
+    @Autowired
+    UserRepository userRepository;
+
+    @Autowired
+    AvaliationRepository avaliationRepository;
+
+    @Autowired
+    CompetenceAvaliationRepository competenceAvaliationRepository;
 
 
     @Override
@@ -79,5 +89,22 @@ public class CompetenceEntityServiceDefault implements CompetenceEntityService {
         if(query.isEmpty()) throw new NotFoundException("Competence not found");
 
         competenceRepository.delete(query.get());
+    }
+
+    @Override
+    public List<List<CompetenceAvaliationEntity>> getByUserId(Long userId) {
+
+        var user = userRepository.findById(userId);
+        if(user.isEmpty()) throw new NotFoundException("User not found");
+
+        var avaliations = avaliationRepository.findByUser(user.get());
+
+        List<List<CompetenceAvaliationEntity>> competenceAvaliations = new ArrayList<>();
+
+        for(var avaliation : avaliations) {
+            competenceAvaliations.add(competenceAvaliationRepository.findByAvaliationEntity(avaliation));
+        }
+
+        return competenceAvaliations;
     }
 }
