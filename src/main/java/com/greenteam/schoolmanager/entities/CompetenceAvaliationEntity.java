@@ -27,6 +27,7 @@ public class CompetenceAvaliationEntity extends BaseEntity {
 
     public CompetenceAvaliationEntity() {}
     public CompetenceAvaliationEntity(String status) {
+        this.update();
         this.status = CompetenceLevel.valueOf(status);
     }
 }

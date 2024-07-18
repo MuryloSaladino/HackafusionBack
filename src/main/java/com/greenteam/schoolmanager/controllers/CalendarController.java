@@ -70,8 +70,8 @@ public class CalendarController {
 
     @GetMapping("/year/{year}/month/{month}")
     protected ResponseEntity<List<CalendarEntityResponse>> getCalendarByYearMonth(
-            @PathVariable @NotEmpty @Positive Integer year,
-            @PathVariable @NotEmpty @Min(1) @Max(12) Integer month
+            @PathVariable @Positive Integer year,
+            @PathVariable @Min(1) @Max(12) Integer month
     ) {
         userSession.verifyToken();
 
