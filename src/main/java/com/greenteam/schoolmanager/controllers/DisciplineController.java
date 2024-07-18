@@ -4,9 +4,11 @@ import com.greenteam.schoolmanager.dto.discipline.DisciplineEntityCreationPayloa
 import com.greenteam.schoolmanager.dto.discipline.DisciplineEntityResponse;
 import com.greenteam.schoolmanager.dto.discipline.DisciplineEntityUpdatePayload;
 import com.greenteam.schoolmanager.interfaces.DisciplineEntityService;
+import com.greenteam.schoolmanager.interfaces.StudentGangDisciplineEntityService;
 import com.greenteam.schoolmanager.sessions.UserSession;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -21,6 +23,9 @@ public class DisciplineController {
 
     @Autowired
     private DisciplineEntityService disciplineEntityService;
+    @Qualifier("studentGangDisciplineService")
+    @Autowired
+    private StudentGangDisciplineEntityService studentGangDisciplineService;
 
     @PostMapping
     protected ResponseEntity<DisciplineEntityResponse> createDiscipline(
@@ -104,6 +109,20 @@ public class DisciplineController {
         return ResponseEntity.ok(
                 disciplineEntityService
                         .getByStudent(id)
+                        .stream()
+                        .map(DisciplineEntityResponse::new)
+                        .toList()
+        );
+    }
+
+    @GetMapping("/notgang/{gangId}")
+    protected ResponseEntity<List<DisciplineEntityResponse>> getDisciplineNotInGang(
+            @PathVariable Long gangId
+    ) {
+        userSession.verifyInstructorOrAdmin();
+
+        return ResponseEntity.ok(
+                studentGangDisciplineService.findByGangNotContaining(gangId)
                         .stream()
                         .map(DisciplineEntityResponse::new)
                         .toList()
