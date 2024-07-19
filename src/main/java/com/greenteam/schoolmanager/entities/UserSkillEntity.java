@@ -15,6 +15,13 @@ public class UserSkillEntity extends BaseEntity {
     @ManyToOne @JoinColumn(nullable = false)
     private SkillEntity skill;
 
+
+    public UserSkillEntity() {}
+
+    public UserSkillEntity(Integer level) {
+        this.level = level;
+    }
+
     public void setLevel(Integer level) {
         this.update();
         this.level = level;

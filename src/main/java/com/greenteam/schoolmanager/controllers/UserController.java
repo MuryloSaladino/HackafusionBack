@@ -50,7 +50,9 @@ public class UserController {
     ) {
         userSession.verifyAdmin();
 
-        return ResponseEntity.ok(new UserEntityResponse( userEntityService.create(body) ));
+        return ResponseEntity
+                .status(201)
+                .body(new UserEntityResponse( userEntityService.create(body) ));
     }
 
     @PatchMapping("/{id}")
