@@ -40,4 +40,9 @@ public class UserSession {
 
         if(userRole.equals(UserRole.STUDENT)) throw new ForbiddenException();
     }
+
+    public void verifyOwnUser(Long userId) {
+        verifyToken();
+        if(!id.equals(userId)) throw new ForbiddenException();
+    }
 }
