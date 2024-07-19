@@ -78,4 +78,15 @@ public class AnswerEntityServiceDefault implements AnswerEntityService {
     public List<AnswerEntity> getAll() {
         return (List<AnswerEntity>) answerRepository.findAll();
     }
+
+    @Override
+    public List<AnswerEntity> getByQuestionId(Long questionId) {
+
+        var query = answerRepository.findByQuestionId(questionId);
+        if(query.isEmpty()) throw new NotFoundException();
+
+        return query;
+    }
+
+
 }

@@ -15,7 +15,6 @@ import java.util.List;
 @Service
 public class QuestionEntityServiceDefault implements QuestionEntityService {
 
-
     @Autowired
     QuestionRepository questionRepository;
 

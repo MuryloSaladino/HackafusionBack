@@ -79,4 +79,19 @@ public class AnswerController {
                 .status(200)
                 .body(new AnswerEntityResponse( answerEntityService.getById(id) ));
     }
+
+    @GetMapping("/question/{questionId}")
+    protected ResponseEntity<List<AnswerEntityResponse>> getAnswerByQuestionId(
+            @PathVariable Long questionId
+    ) {
+        userSession.verifyToken();
+
+        return ResponseEntity.ok(
+                answerEntityService
+                        .getByQuestionId(questionId)
+                        .stream()
+                        .map(AnswerEntityResponse::new)
+                        .toList()
+        );
+    }
 }

@@ -12,4 +12,5 @@ public interface AnswerEntityService {
     void delete(Long id);
     AnswerEntity getById(Long id);
     List<AnswerEntity> getAll();
+    List<AnswerEntity> getByQuestionId(Long questionId);
 }

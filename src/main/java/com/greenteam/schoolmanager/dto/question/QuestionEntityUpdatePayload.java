@@ -7,9 +7,7 @@ import lombok.Getter;
 @Getter @Data
 public class QuestionEntityUpdatePayload {
 
-    @NotNull
     private String title;
 
-    @NotNull
     private String description;
 }

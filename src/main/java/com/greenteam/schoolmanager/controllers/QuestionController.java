@@ -7,7 +7,6 @@ import com.greenteam.schoolmanager.exceptions.NotFoundException;
 import com.greenteam.schoolmanager.interfaces.QuestionEntityService;
 import com.greenteam.schoolmanager.repositories.QuestionRepository;
 import com.greenteam.schoolmanager.sessions.UserSession;
-import io.swagger.v3.oas.annotations.parameters.RequestBody;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -40,7 +39,7 @@ public class QuestionController {
                 .body(new QuestionEntityResponse( questionEntityService.create(body) ));
     }
 
-    @PatchMapping
+    @PatchMapping("/{id}")
     protected ResponseEntity<QuestionEntityResponse> updateQuestion(
             @Valid @RequestBody QuestionEntityUpdatePayload body,
             @PathVariable Long id
@@ -55,7 +54,7 @@ public class QuestionController {
                 .body(new QuestionEntityResponse( questionEntityService.update(id, body) ));
     }
 
-    @DeleteMapping
+    @DeleteMapping("/{id}")
     protected ResponseEntity<QuestionEntityResponse> deleteQuestion(
             @PathVariable Long id
     ) {
