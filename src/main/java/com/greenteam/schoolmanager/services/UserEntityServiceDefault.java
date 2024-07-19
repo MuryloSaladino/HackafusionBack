@@ -110,4 +110,13 @@ public class UserEntityServiceDefault implements UserEntityService {
 
         userRepository.delete(query.get());
     }
+
+    @Override
+    public List<UserEntity> getUsersByRole(UserRole role) {
+
+        var query = userRepository.findByRole(role);
+        if(query.isEmpty()) throw new NotFoundException();
+
+        return query;
+    }
 }

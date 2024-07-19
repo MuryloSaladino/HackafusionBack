@@ -5,6 +5,7 @@ import com.greenteam.schoolmanager.dto.register.PreRegisterPayload;
 import com.greenteam.schoolmanager.dto.user.UserEntityCreationPayload;
 import com.greenteam.schoolmanager.dto.user.UserEntityResponse;
 import com.greenteam.schoolmanager.dto.user.UserEntityUpdatePayload;
+import com.greenteam.schoolmanager.enums.UserRole;
 import com.greenteam.schoolmanager.interfaces.PreRegisterService;
 import com.greenteam.schoolmanager.interfaces.UserEntityService;
 import com.greenteam.schoolmanager.sessions.UserSession;
@@ -99,4 +100,5 @@ public class UserController {
 
         return ResponseEntity.ok(new UserEntityResponse( userEntityService.getById(id) ));
     }
+
 }
