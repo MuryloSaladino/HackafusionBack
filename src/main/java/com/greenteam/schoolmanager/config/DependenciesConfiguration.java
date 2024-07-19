@@ -56,4 +56,6 @@ public class DependenciesConfiguration {
     }
     @Bean @Scope() @Primary
     public UserSkillEntityService userSkillEntityService() { return new UserSkillEntityServiceDefault(); }
+    @Bean @Scope() @Primary
+    public AnswerEntityService answerEntityService() { return new AnswerEntityServiceDefault(); }
 }
