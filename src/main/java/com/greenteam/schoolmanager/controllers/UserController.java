@@ -8,6 +8,7 @@ import com.greenteam.schoolmanager.dto.user.UserEntityUpdatePayload;
 import com.greenteam.schoolmanager.enums.UserRole;
 import com.greenteam.schoolmanager.interfaces.PreRegisterService;
 import com.greenteam.schoolmanager.interfaces.UserEntityService;
+import com.greenteam.schoolmanager.repositories.UserRepository;
 import com.greenteam.schoolmanager.sessions.UserSession;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,6 +28,8 @@ public class UserController {
 
     @Autowired
     private PreRegisterService preRegisterService;
+    @Autowired
+    private UserRepository userRepository;
 
 
     @GetMapping("/admincreate")
@@ -99,6 +102,21 @@ public class UserController {
         userSession.verifyOwnUserOrAdmin(id);
 
         return ResponseEntity.ok(new UserEntityResponse( userEntityService.getById(id) ));
+    }
+
+    @GetMapping("/role/{role}")
+    protected ResponseEntity<List<UserEntityResponse>> getUserFromRole(
+            @PathVariable Integer role
+    ) {
+        userSession.verifyAdmin();
+
+        return ResponseEntity.ok(
+                userEntityService.getUsersByRole(UserRole.integerToRole(role))
+                        .stream()
+                        .map(UserEntityResponse::new)
+                        .toList()
+        );
+
     }
 
 }
