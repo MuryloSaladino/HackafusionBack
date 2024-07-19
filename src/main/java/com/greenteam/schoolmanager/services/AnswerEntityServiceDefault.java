@@ -6,6 +6,8 @@ import com.greenteam.schoolmanager.entities.AnswerEntity;
 import com.greenteam.schoolmanager.exceptions.NotFoundException;
 import com.greenteam.schoolmanager.interfaces.AnswerEntityService;
 import com.greenteam.schoolmanager.repositories.AnswerRepository;
+import com.greenteam.schoolmanager.repositories.QuestionRepository;
+import com.greenteam.schoolmanager.repositories.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -17,15 +19,41 @@ public class AnswerEntityServiceDefault implements AnswerEntityService {
     @Autowired
     AnswerRepository answerRepository;
 
+    @Autowired
+    QuestionRepository questionRepository;
+
+    @Autowired
+    UserRepository userRepository;
+
 
     @Override
     public AnswerEntity create(AnswerEntityCreationPayload payload) {
-        return null;
+
+        AnswerEntity answerEntity = payload.toEntity();
+
+        var questionQuery = questionRepository.findById(payload.getQuestionId());
+        if (questionQuery.isEmpty()) throw new NotFoundException("Question not found");
+
+        var userQuery = userRepository.findById(payload.getUserId());
+        if (userQuery.isEmpty()) throw new NotFoundException("User not found");
+
+        answerEntity.setQuestion(questionQuery.get());
+        answerEntity.setUser(userQuery.get());
+
+        return answerRepository.save(answerEntity);
     }
 
     @Override
     public AnswerEntity update(Long id, AnswerEntityUpdatePayload payload) {
-        return null;
+
+        var query = answerRepository.findById(id);
+        if (query.isEmpty()) throw new NotFoundException("Answer not found");
+
+        var entity = query.get();
+
+        if (payload.getDescription() != null) entity.setDescription(payload.getDescription());
+
+        return answerRepository.save(entity);
     }
 
     @Override

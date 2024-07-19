@@ -16,5 +16,9 @@ public class AnswerEntityCreationPayload {
     @PositiveOrZero
     private Long questionId;
 
-    public AnswerEntity toEntity() { return new AnswerEntity(); }
+    @NotNull
+    @PositiveOrZero
+    private Long userId;
+
+    public AnswerEntity toEntity() { return new AnswerEntity(description); }
 }

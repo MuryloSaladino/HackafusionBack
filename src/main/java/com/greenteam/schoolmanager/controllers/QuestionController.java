@@ -3,7 +3,6 @@ package com.greenteam.schoolmanager.controllers;
 import com.greenteam.schoolmanager.dto.question.QuestionEntityCreationPayload;
 import com.greenteam.schoolmanager.dto.question.QuestionEntityResponse;
 import com.greenteam.schoolmanager.dto.question.QuestionEntityUpdatePayload;
-import com.greenteam.schoolmanager.entities.QuestionEntity;
 import com.greenteam.schoolmanager.exceptions.NotFoundException;
 import com.greenteam.schoolmanager.interfaces.QuestionEntityService;
 import com.greenteam.schoolmanager.repositories.QuestionRepository;

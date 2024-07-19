@@ -10,10 +10,10 @@ public class AnswerEntity extends BaseEntity {
     private String description;
 
     @ManyToOne() @JoinColumn(nullable = false)
-    private QuestionEntity questionId;
+    private QuestionEntity question;
 
     @ManyToOne() @JoinColumn(nullable = false)
-    private UserEntity userId;
+    private UserEntity user;
 
 
     public AnswerEntity() {}
@@ -27,13 +27,13 @@ public class AnswerEntity extends BaseEntity {
         this.description = description;
     }
 
-    public void setQuestion(QuestionEntity questionId) {
+    public void setQuestion(QuestionEntity question) {
         this.update();
-        this.questionId = questionId;
+        this.question = question;
     }
 
-    public void setUserId(UserEntity userId) {
+    public void setUser(UserEntity user) {
         this.update();
-        this.userId = userId;
+        this.user = user;
     }
 }
