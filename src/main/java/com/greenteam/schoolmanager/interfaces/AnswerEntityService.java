@@ -8,8 +8,8 @@ import java.util.List;
 
 public interface AnswerEntityService {
     AnswerEntity create(AnswerEntityCreationPayload payload);
-    AnswerEntity update(AnswerEntityUpdatePayload payload);
+    AnswerEntity update(Long id, AnswerEntityUpdatePayload payload);
     void delete(Long id);
-    AnswerEntity getById(Long id);
+    List<AnswerEntity> getById(Long id);
     List<AnswerEntity> getAll();
 }

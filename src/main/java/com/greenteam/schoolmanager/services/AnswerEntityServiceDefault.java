@@ -24,7 +24,7 @@ public class AnswerEntityServiceDefault implements AnswerEntityService {
     }
 
     @Override
-    public AnswerEntity update(AnswerEntityUpdatePayload payload) {
+    public AnswerEntity update(Long id, AnswerEntityUpdatePayload payload) {
         return null;
     }
 
@@ -32,13 +32,13 @@ public class AnswerEntityServiceDefault implements AnswerEntityService {
     public void delete(Long id) {
 
         var query = answerRepository.findById(id);
-        if (query.isEmpty()) throw new NotFoundException();
+        if(query.isEmpty()) throw new NotFoundException();
 
         answerRepository.delete(query.get());
     }
 
     @Override
-    public AnswerEntity getById(Long id) {
+    public List<AnswerEntity> getById(Long id) {
         return null;
     }
 
