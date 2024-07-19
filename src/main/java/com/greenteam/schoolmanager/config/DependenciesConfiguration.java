@@ -50,4 +50,8 @@ public class DependenciesConfiguration {
     public DisciplineEntityService disciplineEntityService() {
         return new DisciplineEntityServiceDefault();
     }
+    @Bean @Scope() @Primary
+    public SkillEntityService skillEntityService() {
+        return new SkillEntityServiceDefault();
+    }
 }
