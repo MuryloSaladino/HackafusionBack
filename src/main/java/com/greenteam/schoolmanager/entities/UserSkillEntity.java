@@ -7,7 +7,7 @@ import lombok.Getter;
 public class UserSkillEntity extends BaseEntity {
 
     @Column(nullable = false)
-    private Integer level;
+    private Float level;
 
     @ManyToOne @JoinColumn(nullable = false)
     private UserEntity user;
@@ -18,11 +18,11 @@ public class UserSkillEntity extends BaseEntity {
 
     public UserSkillEntity() {}
 
-    public UserSkillEntity(Integer level) {
+    public UserSkillEntity(Float level) {
         this.level = level;
     }
 
-    public void setLevel(Integer level) {
+    public void setLevel(Float level) {
         this.update();
         this.level = level;
     }

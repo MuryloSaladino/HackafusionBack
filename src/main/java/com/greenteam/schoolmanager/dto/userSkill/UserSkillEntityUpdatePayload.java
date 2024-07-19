@@ -10,5 +10,5 @@ import lombok.Getter;
 public class UserSkillEntityUpdatePayload {
 
     @Min(1) @Max(5)
-    private Integer level;
+    private Float level;
 }

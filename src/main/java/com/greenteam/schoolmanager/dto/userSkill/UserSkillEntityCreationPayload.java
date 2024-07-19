@@ -13,7 +13,7 @@ public class UserSkillEntityCreationPayload {
 
     @NotNull
     @Min(1) @Max(5)
-    private Integer level;
+    private Float level;
 
     @NotNull
     @PositiveOrZero

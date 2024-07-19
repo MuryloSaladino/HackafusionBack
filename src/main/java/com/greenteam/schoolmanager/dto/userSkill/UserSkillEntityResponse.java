@@ -6,7 +6,7 @@ import com.greenteam.schoolmanager.entities.UserSkillEntity;
 public class UserSkillEntityResponse {
 
     public Long id;
-    public Integer level;
+    public Float level;
     public SkillEntityResponse skill;
 
 
