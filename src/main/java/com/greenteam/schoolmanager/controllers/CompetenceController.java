@@ -5,6 +5,7 @@ import com.greenteam.schoolmanager.dto.competence.CompetenceEntityResponse;
 import com.greenteam.schoolmanager.dto.competence.CompetenceEntityUpdatePayload;
 import com.greenteam.schoolmanager.dto.student.StudentGradesResponse;
 import com.greenteam.schoolmanager.interfaces.CompetenceEntityService;
+import com.greenteam.schoolmanager.interfaces.StudentGangEntityService;
 import com.greenteam.schoolmanager.interfaces.UserEntityService;
 import com.greenteam.schoolmanager.sessions.UserSession;
 import jakarta.validation.Valid;
@@ -26,6 +27,9 @@ public class CompetenceController {
 
     @Autowired
     private UserEntityService userEntityService;
+
+    @Autowired
+    private StudentGangEntityService studentGangEntityService;
 
     @PostMapping
     protected ResponseEntity<CompetenceEntityResponse> createCompetence(
@@ -97,5 +101,23 @@ public class CompetenceController {
         var query = competenceEntityService.getByUserId(userId);
 
         return ResponseEntity.ok(new StudentGradesResponse(user, query));
+    }
+
+    @GetMapping("/gang/{gangId}")
+    protected ResponseEntity<?> getCompetenceByGang(
+            @PathVariable Long gangId
+    ) {
+        userSession.verifyInstructorOrAdmin();
+
+        var gang = userEntityService.getStudentsByGang(gangId);
+
+        var gangCompetences = gang.stream()
+                .map(student -> {
+                    var query = competenceEntityService.getByUserId(student.getId());
+                    return new StudentGradesResponse(student, query);
+                } )
+                .toList();
+
+        return ResponseEntity.ok(gangCompetences);
     }
 }

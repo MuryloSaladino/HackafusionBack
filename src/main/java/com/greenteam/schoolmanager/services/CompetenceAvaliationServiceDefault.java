@@ -5,6 +5,7 @@ import com.greenteam.schoolmanager.dto.avaliation.CompetenceAvaliationEntityUpda
 import com.greenteam.schoolmanager.entities.AvaliationEntity;
 import com.greenteam.schoolmanager.entities.CompetenceAvaliationEntity;
 import com.greenteam.schoolmanager.enums.CompetenceLevel;
+import com.greenteam.schoolmanager.exceptions.BadRequestException;
 import com.greenteam.schoolmanager.exceptions.NotFoundException;
 import com.greenteam.schoolmanager.interfaces.CompetenceAvaliationEntityService;
 import com.greenteam.schoolmanager.interfaces.UserEntityService;
@@ -56,11 +57,19 @@ public class CompetenceAvaliationServiceDefault implements CompetenceAvaliationE
             newAvaliation.setDiscipline(disciplineQuery.get());
             newAvaliation.setUser(userQuery.get());
             avaliationRepository.save(newAvaliation);
+        } else {
+            newAvaliation = userAvaliationQuery.get();
+        }
+
+        var existentQuery = competenceAvaliationRepository.findByCompetenceAndAvaliationEntity(competenceQuery.get(), newAvaliation);
+
+        if (existentQuery != null) {
+            throw new BadRequestException("Avaliation already exists!");
         }
 
         entity.setStatus(CompetenceLevel.valueOf(payload.getStatus()));
         entity.setCompetence(competenceQuery.get());
-        entity.setAvaliationEntity(newAvaliation == null ? userAvaliationQuery.get() : newAvaliation);
+        entity.setAvaliationEntity(newAvaliation);
 
         return competenceAvaliationRepository.save(entity);
     }
