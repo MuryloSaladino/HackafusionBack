@@ -86,4 +86,5 @@ public class UserSkillEntityServiceDefault implements UserSkillEntityService {
     public List<UserSkillEntity> getAll() {
         return (List<UserSkillEntity>) userSkillRepository.findAll();
     }
+
 }

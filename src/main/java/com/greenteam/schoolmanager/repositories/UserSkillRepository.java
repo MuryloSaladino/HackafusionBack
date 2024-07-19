@@ -12,4 +12,5 @@ import java.util.List;
 public interface UserSkillRepository extends CrudRepository<UserSkillEntity, Long> {
     List<UserSkillEntity> findByUserId(Long userId);
     List<UserSkillEntity> findByUserAndSkill(UserEntity user, SkillEntity skill);
+    List<UserSkillEntity> findBySkill(SkillEntity skill);
 }

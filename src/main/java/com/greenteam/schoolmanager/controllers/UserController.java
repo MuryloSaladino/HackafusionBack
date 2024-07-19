@@ -119,4 +119,28 @@ public class UserController {
 
     }
 
+    @GetMapping("/skills")
+    protected ResponseEntity<List<UserEntityResponse>> getUserFromSkills(
+            @RequestParam(required = false) String skill
+    ) {
+        userSession.verifyAdmin();
+
+        if (skill != null) {
+            return ResponseEntity.ok(
+                    userEntityService
+                            .getUserBySkill(skill)
+                            .stream()
+                            .map(UserEntityResponse::new)
+                            .toList()
+            );
+        }
+        return ResponseEntity.ok(
+                userEntityService
+                        .getUsersByRole(UserRole.INSTRUCTOR)
+                        .stream()
+                        .map(UserEntityResponse::new)
+                        .toList()
+        );
+    }
+
 }

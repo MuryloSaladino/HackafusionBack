@@ -2,17 +2,17 @@ package com.greenteam.schoolmanager.services;
 
 import com.greenteam.schoolmanager.dto.user.UserEntityCreationPayload;
 import com.greenteam.schoolmanager.dto.user.UserEntityUpdatePayload;
+import com.greenteam.schoolmanager.entities.SkillEntity;
 import com.greenteam.schoolmanager.entities.UserEntity;
 import com.greenteam.schoolmanager.enums.UserRole;
 import com.greenteam.schoolmanager.exceptions.NotFoundException;
 import com.greenteam.schoolmanager.interfaces.UserEntityService;
-import com.greenteam.schoolmanager.repositories.PreRegisterRepository;
-import com.greenteam.schoolmanager.repositories.StudentGangRepository;
-import com.greenteam.schoolmanager.repositories.UserRepository;
+import com.greenteam.schoolmanager.repositories.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -29,6 +29,12 @@ public class UserEntityServiceDefault implements UserEntityService {
 
     @Autowired
     PreRegisterRepository preRegisterRepository;
+
+    @Autowired
+    private SkillRepository skillRepository;
+
+    @Autowired
+    private UserSkillRepository userSkillRepository;
 
 
     @Override
@@ -119,4 +125,23 @@ public class UserEntityServiceDefault implements UserEntityService {
 
         return query;
     }
+
+    @Override
+    public List<UserEntity> getUserBySkill(String skill) {
+        var querySkill = skillRepository.findByName(skill);
+        if (querySkill == null) throw new NotFoundException();
+
+        var queryUserSkill = userSkillRepository.findBySkill(querySkill);
+        if (queryUserSkill.isEmpty()) throw new NotFoundException();
+
+        var query = new ArrayList<UserEntity>();
+
+        for(var q : queryUserSkill) {
+            if (q.getUser().getRole().equals(UserRole.INSTRUCTOR))
+                query.add(q.getUser());
+        }
+
+        return query;
+    }
+
 }

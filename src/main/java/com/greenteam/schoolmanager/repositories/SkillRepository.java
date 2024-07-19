@@ -6,4 +6,5 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface SkillRepository extends CrudRepository<SkillEntity, Long> {
+    SkillEntity findByName(String name);
 }
