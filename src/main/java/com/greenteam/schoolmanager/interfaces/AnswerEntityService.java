@@ -10,6 +10,6 @@ public interface AnswerEntityService {
     AnswerEntity create(AnswerEntityCreationPayload payload);
     AnswerEntity update(Long id, AnswerEntityUpdatePayload payload);
     void delete(Long id);
-    List<AnswerEntity> getById(Long id);
+    AnswerEntity getById(Long id);
     List<AnswerEntity> getAll();
 }

@@ -38,12 +38,16 @@ public class AnswerEntityServiceDefault implements AnswerEntityService {
     }
 
     @Override
-    public List<AnswerEntity> getById(Long id) {
-        return null;
+    public AnswerEntity getById(Long id) {
+
+        var query = answerRepository.findById(id);
+        if(query.isEmpty()) throw new NotFoundException();
+
+        return query.get();
     }
 
     @Override
     public List<AnswerEntity> getAll() {
-        return List.of();
+        return (List<AnswerEntity>) answerRepository.findAll();
     }
 }
