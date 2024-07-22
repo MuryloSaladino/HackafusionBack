@@ -89,7 +89,7 @@ public class CalendarController {
             @PathVariable @Min(1) @Max(12) Integer month,
             @PathVariable Long gang
     ) {
-        userSession.verifyInstructorOrAdmin();
+        userSession.verifyToken();
 
         return ResponseEntity.ok(
                 calendarEntityService.getByGangAndDate(gang, year, month)
