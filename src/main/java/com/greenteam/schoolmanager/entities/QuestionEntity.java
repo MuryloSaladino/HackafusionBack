@@ -13,7 +13,7 @@ public class QuestionEntity extends BaseEntity {
     private String description;
 
     @ManyToOne() @JoinColumn(nullable = false)
-    private UserEntity userId;
+    private UserEntity user;
 
 
     public QuestionEntity() {}
@@ -33,8 +33,8 @@ public class QuestionEntity extends BaseEntity {
         this.description = description;
     }
 
-    public void setUser(UserEntity userId) {
+    public void setUser(UserEntity user) {
         this.update();
-        this.userId = userId;
+        this.user = user;
     }
 }

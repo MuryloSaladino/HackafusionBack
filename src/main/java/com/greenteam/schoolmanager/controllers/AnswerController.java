@@ -70,14 +70,25 @@ public class AnswerController {
     }
 
     @GetMapping("/{id}")
-    protected ResponseEntity<List<AnswerEntityResponse>> getAnswerById(
+    protected ResponseEntity<AnswerEntityResponse> getAnswerById(
             @PathVariable Long id
+    ) {
+        userSession.verifyToken();
+
+        return ResponseEntity
+                .status(200)
+                .body(new AnswerEntityResponse( answerEntityService.getById(id) ));
+    }
+
+    @GetMapping("/question/{questionId}")
+    protected ResponseEntity<List<AnswerEntityResponse>> getAnswerByQuestionId(
+            @PathVariable Long questionId
     ) {
         userSession.verifyToken();
 
         return ResponseEntity.ok(
                 answerEntityService
-                        .getById(id)
+                        .getByQuestionId(questionId)
                         .stream()
                         .map(AnswerEntityResponse::new)
                         .toList()
