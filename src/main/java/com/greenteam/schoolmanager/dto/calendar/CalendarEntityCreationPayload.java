@@ -21,7 +21,7 @@ public class CalendarEntityCreationPayload {
     @Size(min = 8, max = 100)
     private String description;
 
-    @NotNull @Future
+    @NotNull
     private Date date;
 
     @NotNull
