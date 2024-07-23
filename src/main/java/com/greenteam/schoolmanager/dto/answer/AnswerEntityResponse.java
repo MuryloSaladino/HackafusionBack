@@ -7,14 +7,12 @@ import com.greenteam.schoolmanager.entities.AnswerEntity;
 public class AnswerEntityResponse {
 
     public Long id;
-    public String desciption;
-    public QuestionEntityResponse question;
+    public String description;
     public UserEntityResponse user;
 
     public AnswerEntityResponse(AnswerEntity answerEntity) {
         this.id = answerEntity.getId();
-        this.desciption = answerEntity.getDescription();
-        this.question = new QuestionEntityResponse(answerEntity.getQuestion());
+        this.description = answerEntity.getDescription();
         this.user = new UserEntityResponse(answerEntity.getUser());
     }
 }
